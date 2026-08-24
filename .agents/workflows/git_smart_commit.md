@@ -1,0 +1,9 @@
+---
+description: Generates a change report, proposes conventional commits organized by modules, synchronizes CHANGELOG.md dynamically, and manages pushing upon confirmation.
+---
+
+1. **Analyze State**: Act as a Git and Documentation expert. Run `git status` and review necessary `git diff` outputs to understand the context. Presta especial atención a los cambios en comentarios de código y archivos de documentación.
+2. **Trigger Skill**: Trigger the `smart-commit-changelog` skill to coordinate conventional commits and dynamic `CHANGELOG.md` / `README.md` synchronization.
+3. **Summary & Proposal**: Generate a detailed summary of changes organized by modules. Formulate the conventional commit messages (with explanations, why, what, and impact in Spanish). **Si los cambios incluyen documentación o comentarios**, asegúrate de usar el tipo `docs:` en los commits convencionales (ej. `docs(modulo): actualización de comentarios`). Formula también the exact markdown entries to be appended to the `CHANGELOG.md` (written in Spanish under the `## [Sin liberar]` section following the *Keep a Changelog* standard) and any changes to `README.md` (written in Spanish). All code comments and user documentation must always be written in Spanish. **CRITICAL:** When adding file links to the documentation, ALWAYS use relative paths. NEVER leak the local computer absolute paths (e.g., `file:///Users/...`).
+4. **Confirmation**: Present both the proposed commit messages and the proposed documentation updates (in Spanish) to the user for explicit approval. **DO NOT** commit or push automatically.
+5. **Atomic Execution**: Once approved, write the updates to `CHANGELOG.md` y archivos de documentación o comentarios, stage all changes, create the conventional commit(s) atomically, and push to the remote repository.

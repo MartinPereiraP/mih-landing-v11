@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # 1. Redirigir los assets (css/js/imágenes) silenciosamente a public/
+    RewriteCond %{REQUEST_URI} ^/build/ [OR]
+    RewriteCond %{REQUEST_URI} ^/assets/ [OR]
+    RewriteCond %{REQUEST_URI} ^/favicon.ico
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # 2. Todo lo demás, si no es un archivo real en la raíz, enviarlo a index.php para que Laravel lo procese
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php [L]
+</IfModule>
