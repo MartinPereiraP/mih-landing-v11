@@ -8,6 +8,7 @@
     # 1. Redirigir los assets (css/js/imágenes) silenciosamente a public/
     RewriteCond %{REQUEST_URI} ^/build/ [OR]
     RewriteCond %{REQUEST_URI} ^/assets/ [OR]
+    RewriteCond %{REQUEST_URI} ^/resources/images/ [OR]
     RewriteCond %{REQUEST_URI} ^/favicon.ico
     RewriteRule ^(.*)$ public/$1 [L]
 
