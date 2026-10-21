@@ -1,9 +1,125 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CL">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sitio en Mantenimiento</title>
+    
+    <!-- Primaria SEO -->
+    <title>MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile</title>
+    <meta name="description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL.">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <!-- Geo-Tagging Local SEO Chile -->
+    <meta name="geo.region" content="CL-VS">
+    <meta name="geo.placename" content="Valparaíso, Chile">
+    <meta name="geo.position" content="-33.0458;-71.6238">
+    <meta name="ICBM" content="-33.0458, -71.6238">
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile">
+    <meta property="og:description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="Agencia de Embarques MIH">
+    <meta property="og:image" content="{{ asset('resources/images/logo-mih.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('resources/images/logo-mih.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt" content="Agencia de Embarques MIH SpA - Logotipo y Comercio Exterior">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile">
+    <meta name="twitter:description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL.">
+    <meta name="twitter:image" content="{{ asset('resources/images/logo-mih.png') }}">
+    <meta name="twitter:image:alt" content="Agencia de Embarques MIH SpA">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Datos Estructurados Schema.org JSON-LD (@graph) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["Organization", "LocalBusiness"],
+          "@id": "https://mih.cl/#organization",
+          "name": "Agencia de Embarques MIH SpA",
+          "alternateName": "MIH Comercio Exterior",
+          "legalName": "Agencia de Embarques MIH SpA",
+          "url": "https://mih.cl",
+          "logo": {
+            "@type": "ImageObject",
+            "@id": "https://mih.cl/#logo",
+            "url": "https://mih.cl/resources/images/logo-mih.png",
+            "caption": "Agencia de Embarques MIH SpA"
+          },
+          "image": "https://mih.cl/resources/images/logo-mih.png",
+          "description": "Agencia de Embarques y Freight Forwarder en Chile. Especialistas en comercio exterior, tramitación aduanera (DIN/DUS) y transporte marítimo, aéreo y terrestre.",
+          "telephone": "+56323423242",
+          "email": "contacto@mih.cl",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Almirante Señoret 70, Oficina 51",
+            "addressLocality": "Valparaíso",
+            "addressRegion": "Región de Valparaíso",
+            "postalCode": "2340000",
+            "addressCountry": "CL"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -33.0458,
+            "longitude": -71.6238
+          },
+          "areaServed": [
+            {
+              "@type": "Country",
+              "name": "Chile"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Puerto de Valparaíso"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Puerto de San Antonio"
+            },
+            {
+              "@type": "Airport",
+              "name": "Aeropuerto Internacional Arturo Merino Benítez (SCL)"
+            }
+          ],
+          "knowsAbout": [
+            "Comercio Exterior",
+            "Agencia de Embarques",
+            "Freight Forwarding",
+            "Agenciamiento Aduanero",
+            "Transporte Marítimo FCL y LCL",
+            "Transporte Aéreo de Carga",
+            "Normativa Aduanera Chilena",
+            "Tramitación DIN y DUS"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://mih.cl/#website",
+          "url": "https://mih.cl",
+          "name": "Agencia de Embarques MIH SpA",
+          "description": "Agencia de Embarques, Comercio Exterior y Gestión Aduanera en Chile",
+          "publisher": {
+            "@id": "https://mih.cl/#organization"
+          },
+          "inLanguage": "es-CL"
+        }
+      ]
+    }
+    </script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialiased">
@@ -19,33 +135,33 @@
         >
             <!-- Icon -->
             <div class="mb-8 p-4 bg-white/5 rounded-2xl border border-white/10 shadow-xl backdrop-blur-sm">
-                <svg class="w-8 h-8 text-orange-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16 4.6V3.86a2.92 2.92 0 0 0-.86-2.25L13.89 1.4a.52.52 0 0 0-.74 0L9.5 5.06a.52.52 0 0 0 0 .74l1.25 1.25c.6.6.93 1.4.93 2.25v.86L14 12.91c.21.21.5.33.8.33h.85c.85 0 1.65.33 2.25.93l1.25 1.25a.52.52 0 0 0 .74 0Z"/></svg>
+                <svg class="w-8 h-8 text-orange-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16 4.6V3.86a2.92 2.92 0 0 0-.86-2.25L13.89 1.4a.52.52 0 0 0-.74 0L9.5 5.06a.52.52 0 0 0 0 .74l1.25 1.25c.6.6.93 1.4.93 2.25v.86L14 12.91c.21.21.5.33.8.33h.85c.85 0 1.65.33 2.25.93l1.25 1.25a.52.52 0 0 0 .74 0Z"/></svg>
             </div>
 
             <!-- Typography -->
             <h1 class="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-white">
-                Sitio en Mantenimiento
+                Agencia de Embarques MIH SpA
             </h1>
             
             <p class="text-lg text-neutral-400 max-w-md mx-auto mb-12 font-light leading-relaxed">
-                Estamos realizando mejoras en nuestra plataforma para brindarte un mejor servicio. Estaremos de vuelta muy pronto.
+                Supervisión documental y operativa en puertos de Valparaíso, San Antonio y Aeropuerto SCL.
             </p>
 
             <div class="h-px w-16 bg-neutral-800 mb-12"></div>
 
             <!-- Contact -->
             <div class="flex flex-col items-center text-sm text-neutral-500 gap-2">
-                <p>¿Necesitas ayuda urgente?</p>
-                <a href="mailto:contacto@mih.cl" class="flex items-center gap-2 hover:text-orange-400 transition-colors">
-                    <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                <p>Contacto Mesa de Operaciones</p>
+                <a href="mailto:contacto@mih.cl" aria-label="Enviar correo corporativo a contacto@mih.cl" class="flex items-center gap-2 hover:text-orange-400 transition-colors">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                     contacto@mih.cl
                 </a>
             </div>
         </main>
         
-        <div class="absolute bottom-8 w-full text-center text-xs text-neutral-600">
-            &copy; {{ date('Y') }} MIH
-        </div>
+        <footer class="absolute bottom-8 w-full text-center text-xs text-neutral-600">
+            &copy; {{ date('Y') }} Agencia de Embarques MIH SpA. Todos los derechos reservados.
+        </footer>
     </div>
     <script>
         setTimeout(() => {
