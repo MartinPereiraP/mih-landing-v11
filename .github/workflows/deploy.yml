@@ -1,0 +1,75 @@
+name: Deploy Laravel Landing to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build & Deploy via FTPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout del código
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, xml, ctype, json, bcmath, curl
+          coverage: none
+
+      - name: 3. Instalar dependencias de Composer (Producción)
+        run: |
+          sudo ln -sf $(which php) /usr/local/bin/php || true
+          composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+
+      - name: 4. Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 5. Compilar Assets (Vite/Tailwind)
+        run: |
+          npm ci
+          npm run build
+
+      - name: 6. Limpiar archivos de caché locales antes de transferir
+        run: |
+          rm -rf bootstrap/cache/*.php
+          rm -rf storage/framework/views/*.php
+
+      - name: 7. Sincronizar con cPanel vía FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.agents/**
+            **/node_modules/**
+            **/tests/**
+            .phpunit.result.cache
+            .env
+            .env.*
+            .htaccess
+            public/.htaccess
+            storage/**
+            *.zip
+            *.md
+            phpunit.xml
+            vite.config.js
+            postcss.config.js
+            tailwind.config.js
+            package.json
+            package-lock.json
+            composer.json
+            composer.lock
