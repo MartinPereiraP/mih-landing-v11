@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /build/
+Disallow: /_inertia/
+
+Sitemap: https://mih.cl/sitemap.xml

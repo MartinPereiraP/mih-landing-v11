@@ -5,15 +5,45 @@
 
     RewriteEngine On
 
-    # 1. Redirigir los assets (css/js/imágenes) silenciosamente a public/
+    # 0. Forzar HTTPS (Redirección 301 si entran por HTTP)
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # 1. Bloquear acceso a carpetas internas de Laravel y dependencias en la raíz
+    RewriteRule ^(app|bootstrap|cache|config|database|node_modules|resources|routes|storage|tests|vendor)/(.*) - [F,L]
+
+    # 2. Redirigir los assets permitidos silenciosamente a public/
     RewriteCond %{REQUEST_URI} ^/build/ [OR]
     RewriteCond %{REQUEST_URI} ^/assets/ [OR]
     RewriteCond %{REQUEST_URI} ^/resources/images/ [OR]
-    RewriteCond %{REQUEST_URI} ^/favicon.ico
+    RewriteCond %{REQUEST_URI} ^/img/ [OR]
+    RewriteCond %{REQUEST_URI} ^/favicon.ico [OR]
+    RewriteCond %{REQUEST_URI} ^/favicon.svg
     RewriteRule ^(.*)$ public/$1 [L]
 
-    # 2. Todo lo demás, si no es un archivo real en la raíz, enviarlo a index.php para que Laravel lo procese
+    # 3. Enviar el resto a index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php [L]
 </IfModule>
+
+# 4. Bloquear acceso directo a archivos de configuración, documentación y comprimidos en la raíz
+<FilesMatch "^(\.env.*|\.git.*|composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml|.*\.md|.*\.config\.js|.*\.zip|.*\.sql|.*\.tar\.gz)$">
+    Require all denied
+</FilesMatch>
+
+# Bloquear cualquier archivo oculto que empiece con punto (.htaccess, .editorconfig, etc.)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# 5. Cabeceras de Seguridad HTTP (Security Headers)
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header unset X-Powered-By
+</IfModule>
+
+ServerSignature Off
