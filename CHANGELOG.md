@@ -22,6 +22,7 @@
 ### Eliminado
 - Archivo muerto `resources/views/welcome.blade.php` (remanente tradicional de Laravel no utilizado en la arquitectura Inertia.js).
 - Componentes redundantes `Welcome.vue` y `Welcome.original.vue` en favor de la nomenclatura explícita (`Maintenance.vue` y `Landing.vue`).
+- Desindexación de la carpeta de IA `.agents/` del seguimiento de Git e inclusión en `.gitignore` para mantener el repositorio limpio y neutral.
 
 ### Arreglado
 - Configuración de `index.php` en la raíz y reglas estrictas de `.htaccess` para prevenir redirecciones 301 invasivas de Apache (Hostinger) hacia `/public/`.
