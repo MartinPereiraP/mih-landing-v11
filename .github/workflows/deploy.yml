@@ -39,8 +39,10 @@ jobs:
 
       - name: 6. Limpiar archivos de caché locales antes de transferir
         run: |
-          rm -rf bootstrap/cache/*.php
+          rm -f bootstrap/cache/config.php
+          rm -f bootstrap/cache/routes*.php
           rm -rf storage/framework/views/*.php
+
 
       - name: 7. Sincronizar con cPanel vía FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
