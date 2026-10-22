@@ -9,10 +9,7 @@
     RewriteCond %{HTTPS} !=on
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # 1. Bloquear acceso a carpetas internas de Laravel y dependencias en la raíz
-    RewriteRule ^(app|bootstrap|cache|config|database|node_modules|resources|routes|storage|tests|vendor)/(.*) - [F,L]
-
-    # 2. Redirigir los assets permitidos silenciosamente a public/
+    # 1. Redirigir los assets permitidos silenciosamente a public/
     RewriteCond %{REQUEST_URI} ^/build/ [OR]
     RewriteCond %{REQUEST_URI} ^/assets/ [OR]
     RewriteCond %{REQUEST_URI} ^/resources/images/ [OR]
@@ -20,6 +17,10 @@
     RewriteCond %{REQUEST_URI} ^/favicon.ico [OR]
     RewriteCond %{REQUEST_URI} ^/favicon.svg
     RewriteRule ^(.*)$ public/$1 [L]
+
+    # 2. Bloquear acceso a carpetas internas de Laravel y dependencias en la raíz
+    RewriteRule ^(app|bootstrap|cache|config|database|node_modules|resources|routes|storage|tests|vendor)/(.*) - [F,L]
+
 
     # 3. Enviar el resto a index.php
     RewriteCond %{REQUEST_FILENAME} !-f

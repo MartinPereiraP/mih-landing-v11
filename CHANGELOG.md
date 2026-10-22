@@ -13,9 +13,13 @@
 - Integración de metadatos SEO avanzados (OpenGraph, Twitter Cards, Schema.org) en plantillas Blade.
 - Suite de pruebas automatizadas para verificación de SEO en `tests/Feature/SeoRoutesTest.php`.
 - Actualizaciones en interfaz de usuario y compilación de assets para producción con Vite.
+- Auto-creación dinámica de directorios críticos de `storage` y `bootstrap/cache` en `public/index.php`.
+- Endpoint de telemetría y diagnóstico seguro (`?diag=mih2026`) en `public/index.php` para validar el entorno en cPanel.
 
 ### Arreglado
 - Configuración de `index.php` en la raíz y reglas estrictas de `.htaccess` para prevenir redirecciones 301 invasivas de Apache (Hostinger) hacia `/public/`.
 - Corrección de redirección en `.htaccess` raíz para evitar Error 404 de Laravel al acceder a la ruta `/resources/images/`.
 - Configuración de políticas de CORS globales (`Access-Control-Allow-Origin "*"`) en la carpeta pública para consumo remoto de imágenes.
+- Corrección en workflow de despliegue (`.github/workflows/deploy.yml`) para preservar archivos descubiertos `packages.php` y `services.php` en `bootstrap/cache/`.
+- Reordenamiento de directivas en `.htaccess` para procesar el rewrite de assets antes de la regla de bloqueo de carpetas internas.
 
