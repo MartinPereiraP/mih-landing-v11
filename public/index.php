@@ -36,12 +36,20 @@ if (isset($_GET['diag']) && $_GET['diag'] === 'mih2026') {
         $envContent = file_get_contents(__DIR__.'/../.env');
         echo "APP_KEY definida: ".(preg_match('/^APP_KEY=.+/m', $envContent) ? 'SI' : 'NO')."\n";
     }
+    if (file_exists($log = __DIR__.'/../storage/logs/laravel.log')) {
+        echo "\n=== ULTIMAS LINEAS DE LARAVEL.LOG ===\n";
+        $logLines = file($log);
+        echo implode("", array_slice($logLines, -50));
+    }
     echo "\n=== INTENTO DE BOOTSTRAP DE LARAVEL ===\n";
     try {
+        putenv('APP_DEBUG=true');
+        $_ENV['APP_DEBUG'] = 'true';
+        $_SERVER['APP_DEBUG'] = 'true';
         require __DIR__.'/../vendor/autoload.php';
         $app = require_once __DIR__.'/../bootstrap/app.php';
         $app->handleRequest(Request::capture());
-        echo "¡Bootstrap completado con exito!\n";
+        echo "\n¡Bootstrap completado con exito!\n";
     } catch (\Throwable $e) {
         echo "ERROR DETECTADO:\n";
         echo "Clase: ".get_class($e)."\n";
