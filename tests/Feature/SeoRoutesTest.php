@@ -63,4 +63,13 @@ class SeoRoutesTest extends TestCase
         $response->assertSee('<changefreq>weekly</changefreq>', false);
         $response->assertSee('<priority>1.0</priority>', false);
     }
+
+    public function test_preview_route_renders_landing_page(): void
+    {
+        $response = $this->get('/preview');
+
+        $response->assertStatus(200);
+        $response->assertSee('MIH | Agencia de Embarques', false);
+    }
 }
+

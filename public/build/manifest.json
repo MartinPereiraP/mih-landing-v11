@@ -5,41 +5,40 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-B3LmE32n.js",
+    "file": "assets/app-BffLy85c.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
-      "resources/js/pages/Welcome.original.vue",
-      "resources/js/pages/Welcome.vue"
+      "resources/js/pages/Landing.vue",
+      "resources/js/pages/Maintenance.vue"
     ],
     "css": [
       "assets/app--XHeKiqh.css"
     ]
   },
-  "resources/js/pages/Welcome.original.vue": {
-    "file": "assets/Welcome.original-Bpx5EUmb.js",
-    "name": "Welcome.original",
-    "src": "resources/js/pages/Welcome.original.vue",
+  "resources/js/pages/Landing.vue": {
+    "file": "assets/Landing-BOdkaRAt.js",
+    "name": "Landing",
+    "src": "resources/js/pages/Landing.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js"
     ],
     "css": [
-      "assets/Welcome-CLY4iuXT.css",
+      "assets/Landing-CLY4iuXT.css",
       "assets/app--XHeKiqh.css"
     ]
   },
-  "resources/js/pages/Welcome.vue": {
-    "file": "assets/Welcome-C577Ik18.js",
-    "name": "Welcome",
-    "src": "resources/js/pages/Welcome.vue",
+  "resources/js/pages/Maintenance.vue": {
+    "file": "assets/Maintenance-CPdUPwZI.js",
+    "name": "Maintenance",
+    "src": "resources/js/pages/Maintenance.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js"
     ],
     "css": [
-      "assets/Welcome-CLY4iuXT.css",
       "assets/app--XHeKiqh.css"
     ]
   }

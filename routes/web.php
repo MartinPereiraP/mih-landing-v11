@@ -3,9 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// Ruta pública: Sitio en Mantenimiento
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('Maintenance');
 });
+
+// Ruta privada para revisar y pulir la Landing Page oficial
+Route::get('/preview', function () {
+    return Inertia::render('Landing');
+});
+
 
 Route::get('/robots.txt', function () {
     $robots = implode("\n", [
