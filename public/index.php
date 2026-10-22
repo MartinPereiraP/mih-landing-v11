@@ -18,6 +18,23 @@ foreach ($requiredDirs as $dir) {
     }
 }
 
+// Depurar cachés obsoletos de configuración o paquetes dev previos en el servidor
+foreach (['config.php', 'routes-v7.php', 'routes.php'] as $cacheFile) {
+    $path = __DIR__.'/../bootstrap/cache/'.$cacheFile;
+    if (file_exists($path)) {
+        @unlink($path);
+    }
+}
+foreach (['services.php', 'packages.php'] as $manifestFile) {
+    $path = __DIR__.'/../bootstrap/cache/'.$manifestFile;
+    if (file_exists($path)) {
+        $content = (string) @file_get_contents($path);
+        if (str_contains($content, 'Laravel\\Pail') || str_contains($content, 'Laravel\\Sail') || str_contains($content, 'laravel/pail')) {
+            @unlink($path);
+        }
+    }
+}
+
 // Endpoint de diagnóstico seguro para validar arranque en cPanel
 if (isset($_GET['diag']) && $_GET['diag'] === 'mih2026') {
     header('Content-Type: text/plain; charset=utf-8');
