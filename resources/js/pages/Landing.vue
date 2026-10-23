@@ -34,37 +34,6 @@ const faqs = [
     }
 ];
 
-// Formulario de Contacto B2B para Empresas y Agencias de Aduana
-const form = ref({
-    companyName: '',
-    rut: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    serviceType: 'Tramitación Exportación (DUS)',
-    customsZone: 'Valparaíso (Matriz & ZEAL)',
-    details: ''
-});
-const formSent = ref(false);
-
-const submitContactForm = () => {
-    const subject = encodeURIComponent(`[Requerimiento Aduanero B2B] ${form.value.companyName} (${form.value.rut}) - ${form.value.serviceType}`);
-    const body = encodeURIComponent(
-        `Solicitud de Gestión Aduanera - Agencia de Embarques MIH SpA\n` +
-        `==================================================\n\n` +
-        `Razón Social / Agencia: ${form.value.companyName}\n` +
-        `RUT Empresa: ${form.value.rut}\n` +
-        `Nombre de Contacto: ${form.value.contactName}\n` +
-        `Email Corporativo: ${form.value.email}\n` +
-        `Teléfono: ${form.value.phone}\n` +
-        `Tipo de Trámite: ${form.value.serviceType}\n` +
-        `Zona Primaria / Aduana: ${form.value.customsZone}\n\n` +
-        `Detalle del Despacho / Requerimiento:\n${form.value.details}\n`
-    );
-    window.location.href = `mailto:contacto@mih.cl?subject=${subject}&body=${body}`;
-    formSent.value = true;
-};
-
 const acceptCookies = () => {
     localStorage.setItem('cookies_accepted', 'true');
     showCookieBanner.value = false;
@@ -666,194 +635,110 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <!-- Contacto Corporativo B2B y Cobertura Nacional -->
+        <!-- Contacto Corporativo y Canales de Operación Directa -->
         <section id="contacto" class="py-36 lg:py-48 transition-colors duration-500 relative">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-100/50 dark:to-white/[0.02] pointer-events-none"></div>
-            <div class="mx-auto max-w-7xl px-6 sm:px-8 grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
+            <div class="mx-auto max-w-7xl px-6 sm:px-8">
                 
-                <!-- Columna Izquierda: Información de Oficina Central y Zonas Primarias -->
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Contacto Corporativo</span>
-                    <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl">Mesa de Operaciones Central.</h2>
-                    <p class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed tracking-wide">
-                        Nuestras oficinas centrales están ubicadas en el centro histórico y aduanero de Valparaíso, facilitando la coordinación directa con las direcciones nacionales de control aduanero y portuario.
+                <div class="max-w-3xl mb-16">
+                    <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Canales Oficiales</span>
+                    <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl text-slate-900 dark:text-white mt-1">Mesa de Operaciones Central.</h2>
+                    <p class="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 leading-relaxed mt-3">
+                        Nuestras oficinas centrales están ubicadas en el centro histórico y aduanero de Valparaíso. De acuerdo con nuestra política de estricto resguardo documental y en cumplimiento de la Ley 21.719, las aperturas de carpetas y coordinaciones de despacho se gestionan exclusivamente mediante comunicación corporativa directa o credenciales en la plataforma MIHSystem.
                     </p>
-
-                    <div class="space-y-4 pt-2 text-xs font-bold text-slate-600 dark:text-slate-300 font-mono">
-                        <div class="flex items-center gap-3">
-                            <svg class="h-5 w-5 text-[#f59d02] shrink-0" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            </svg>
-                            <span>Almirante Señoret 70, Oficina 51, Valparaíso - Chile.</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <svg class="h-5 w-5 text-[#f59d02] shrink-0" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                            </svg>
-                            <span>Fono Operaciones: 032-3423242</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <svg class="h-5 w-5 text-[#f59d02] shrink-0" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            <span>Correo Central: contacto@mih.cl</span>
-                        </div>
-                        
-                        <div class="flex items-start gap-3 pt-3">
-                            <svg class="h-5 w-5 text-[#f59d02] shrink-0 mt-0.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                            </svg>
-                            <div class="flex flex-col w-full">
-                                <h3 class="font-medium text-slate-900 dark:text-white mb-2">Presencia en Zonas Primarias (Marítimas, Terrestres y Aéreas):</h3>
-                                <div class="flex flex-wrap gap-1.5 mt-1">
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Arica (Chacalluta)</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-[#f59d02]/10 border border-[#f59d02]/20 text-[10px] font-semibold text-[#f59d02] uppercase tracking-wider">Valparaíso (Matriz & ZEAL)</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Coquimbo</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">San Antonio</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Los Andes (PTLA)</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Pino Hachado</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-sky-500/10 border border-sky-500/20 text-[10px] font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider">Aeropuerto SCL</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Cardenal Samoré</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Talcahuano</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">San Vicente</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Lirquén</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Coronel</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Columna Derecha: Formulario de Requerimiento Aduanero B2B -->
-                <div class="lg:col-span-7">
-                    <div class="rounded-[2rem] border border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-colors duration-500">
-                        <div class="border-b border-slate-200 dark:border-white/10 pb-4 mb-6">
-                            <span class="text-[11px] font-bold uppercase tracking-widest text-[#f59d02]">Formulario de Solicitud B2B</span>
-                            <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 dark:text-white mt-1">Requerimiento de Gestión Documental</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Dirigido a Agencias de Aduana y Empresas Importadoras / Exportadoras.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    
+                    <!-- Tarjeta Teléfono -->
+                    <a 
+                        href="tel:+56323423242"
+                        class="group rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 shadow-sm transition-all hover:scale-[1.02] hover:shadow-md"
+                        aria-label="Llamar a Mesa Central de Operaciones al 032-3423242"
+                    >
+                        <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] mb-6 group-hover:bg-[#f59d02] group-hover:text-slate-950 transition-colors">
+                            <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
                         </div>
+                        <span class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Atención Telefónica</span>
+                        <span class="block text-lg font-bold text-slate-900 dark:text-white mt-1 font-mono">032-3423242</span>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                            Mesa de Operaciones Central para consultas inmediatas sobre despachos en curso.
+                        </p>
+                    </a>
 
-                        <form @submit.prevent="submitContactForm" class="space-y-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="companyName">Razón Social / Agencia *</label>
-                                    <input 
-                                        id="companyName"
-                                        v-model="form.companyName" 
-                                        type="text" 
-                                        required 
-                                        placeholder="Ej: Comercial Andina SpA"
-                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
-                                    />
-                                </div>
-                                <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="rut">RUT Empresa *</label>
-                                    <input 
-                                        id="rut"
-                                        v-model="form.rut" 
-                                        type="text" 
-                                        required 
-                                        placeholder="76.xxx.xxx-x"
-                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors font-mono"
-                                    />
-                                </div>
-                            </div>
+                    <!-- Tarjeta Correo -->
+                    <a 
+                        href="mailto:contacto@mih.cl"
+                        class="group rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 shadow-sm transition-all hover:scale-[1.02] hover:shadow-md"
+                        aria-label="Enviar correo corporativo a contacto@mih.cl"
+                    >
+                        <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] mb-6 group-hover:bg-[#f59d02] group-hover:text-slate-950 transition-colors">
+                            <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <span class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Correo Corporativo</span>
+                        <span class="block text-lg font-bold text-slate-900 dark:text-white mt-1 font-mono">contacto@mih.cl</span>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                            Recepción de instructivos de embarque, carpetas DUS/DIN y requerimientos operativos.
+                        </p>
+                    </a>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="serviceType">Tipo de Requerimiento *</label>
-                                    <select 
-                                        id="serviceType"
-                                        v-model="form.serviceType"
-                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
-                                    >
-                                        <option value="Tramitación Exportación (DUS)">Tramitación Exportación (DUS)</option>
-                                        <option value="Tramitación Importación (DIN)">Tramitación Importación (DIN)</option>
-                                        <option value="Asistencia en Aforo / Zona Primaria">Asistencia en Aforo / Zona Primaria</option>
-                                        <option value="Consulta / Integración MIHSystem">Consulta / Integración MIHSystem</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="customsZone">Zona Primaria / Aduana *</label>
-                                    <select 
-                                        id="customsZone"
-                                        v-model="form.customsZone"
-                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
-                                    >
-                                        <option value="Valparaíso (Matriz & ZEAL)">Valparaíso (Matriz & ZEAL)</option>
-                                        <option value="San Antonio">San Antonio</option>
-                                        <option value="Aeropuerto SCL (Santiago)">Aeropuerto SCL (Santiago)</option>
-                                        <option value="Los Andes (PTLA)">Los Andes (PTLA)</option>
-                                        <option value="Biobío (Talcahuano / San Vicente / Coronel / Lirquén)">Biobío (Talcahuano / San Vicente)</option>
-                                        <option value="Arica (Chacalluta)">Arica (Chacalluta)</option>
-                                        <option value="Coquimbo">Coquimbo</option>
-                                        <option value="Pasos Fronterizos Terrestres (Pino Hachado / Samoré)">Pasos Terrestres (Pino Hachado / Samoré)</option>
-                                        <option value="Otra Zona Primaria">Otra Zona Primaria</option>
-                                    </select>
-                                </div>
-                            </div>
+                    <!-- Tarjeta Sede Matriz -->
+                    <div class="rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 shadow-sm">
+                        <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] mb-6">
+                            <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            </svg>
+                        </div>
+                        <span class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Oficina Central</span>
+                        <span class="block text-base font-bold text-slate-900 dark:text-white mt-1">Valparaíso, Chile</span>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                            Almirante Señoret 70, Oficina 51.<br/>
+                            <span class="text-slate-500 dark:text-slate-400">Horario: Lun a Vie 08:30 a 18:30 hrs.</span>
+                        </p>
+                    </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="contactName">Contacto *</label>
-                                    <input 
-                                        id="contactName"
-                                        v-model="form.contactName" 
-                                        type="text" 
-                                        required 
-                                        placeholder="Nombre y Apellido"
-                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
-                                    />
-                                </div>
-                                <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="email">Email Corporativo *</label>
-                                    <input 
-                                        id="email"
-                                        v-model="form.email" 
-                                        type="email" 
-                                        required 
-                                        placeholder="ejecutivo@empresa.cl"
-                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
-                                    />
-                                </div>
-                                <div>
-                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="phone">Teléfono / Anexo *</label>
-                                    <input 
-                                        id="phone"
-                                        v-model="form.phone" 
-                                        type="tel" 
-                                        required 
-                                        placeholder="+56 9 xxxx xxxx"
-                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors font-mono"
-                                    />
-                                </div>
-                            </div>
+                </div>
 
-                            <div>
-                                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="details">Detalle del Requerimiento / Despacho</label>
-                                <textarea 
-                                    id="details"
-                                    v-model="form.details"
-                                    rows="3" 
-                                    placeholder="Indique información relevante del despacho: N° de carpetas estimadas, mercancía, fechas aproximadas o requerimiento especial en zona primaria..."
-                                    class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 p-3 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors resize-none"
-                                ></textarea>
-                            </div>
+                <!-- Cobertura Nacional de Zonas Primarias -->
+                <div class="rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 sm:p-10 shadow-sm">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-200/60 dark:border-white/10">
+                        <div>
+                            <span class="text-[11px] font-bold uppercase tracking-widest text-[#f59d02]">Red Operativa Nacional</span>
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mt-1">Presencia en Zonas Primarias (Marítimas, Terrestres y Aéreas)</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">
+                                Coordinación presencial de aforos, visaciones y tramitaciones en los principales recintos aduaneros de Chile.
+                            </p>
+                        </div>
+                        <a 
+                            href="https://mihsystem.cl" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#f59d02] px-6 py-3 text-xs font-bold text-slate-950 shadow-[0_4px_14px_rgba(245,157,2,0.3)] transition-all hover:scale-[1.02] hover:bg-[#e08f02] shrink-0"
+                            aria-label="Acceder a la Plataforma de Clientes MIHSystem"
+                        >
+                            Acceso Clientes MIHSystem
+                        </a>
+                    </div>
 
-                            <div class="flex items-center justify-between pt-2">
-                                <span class="text-[11px] text-slate-500 dark:text-slate-400">Atención directa: Lun a Vie 08:30 a 18:30 hrs.</span>
-                                <button 
-                                    type="submit" 
-                                    class="rounded-xl bg-[#f59d02] px-6 py-3 text-xs font-bold text-slate-950 shadow-[0_4px_14px_rgba(245,157,2,0.3)] transition-all hover:scale-[1.02] hover:bg-[#e08f02] cursor-pointer"
-                                >
-                                    Enviar a Mesa de Operaciones
-                                </button>
-                            </div>
-
-                            <div v-if="formSent" class="mt-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
-                                Requerimiento preparado. Su cliente de correo se abrirá para confirmar el envío a <strong>contacto@mih.cl</strong>.
-                            </div>
-                        </form>
+                    <div class="pt-6">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Arica (Chacalluta)</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#f59d02]/10 border border-[#f59d02]/30 text-[11px] font-semibold text-[#f59d02] uppercase tracking-wider">Valparaíso (Matriz & ZEAL)</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Coquimbo</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">San Antonio</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Los Andes (PTLA)</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Pino Hachado</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/30 text-[11px] font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider">Aeropuerto SCL (Santiago)</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Cardenal Samoré</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Talcahuano</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">San Vicente</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Lirquén</span>
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Coronel</span>
+                        </div>
                     </div>
                 </div>
 
@@ -948,8 +833,8 @@ onUnmounted(() => {
                 <div class="overflow-y-auto p-6 text-sm text-slate-600 dark:text-slate-300 space-y-4">
                     <template v-if="activeModal === 'privacy'">
                         <p><strong>1. Responsable del Tratamiento:</strong> Agencia de Embarques MIH SpA, con domicilio en Almirante Señoret 70, Oficina 51, Valparaíso.</p>
-                        <p><strong>2. Finalidad:</strong> La información recopilada mediante nuestros canales corporativos es utilizada exclusivamente para coordinar y ejecutar la tramitación documental aduanera y los servicios en zona primaria solicitados por nuestros clientes.</p>
-                        <p><strong>3. Base Legal:</strong> El tratamiento se rige por la Ley N° 19.628 sobre Protección de la Vida Privada (actualizada por la Ley 21.719). Sus datos no serán cedidos a terceros, salvo requerimientos legales dictaminados por el Servicio Nacional de Aduanas u otros organismos competentes del Estado de Chile.</p>
+                        <p><strong>2. Canales Directos y Sin Recolección Web:</strong> Este sitio web institucional no dispone de formularios de captura de datos ni almacena registros en bases de datos web. Las comunicaciones y requerimientos se canalizan de manera directa por correo electrónico, teléfono o mediante el acceso autenticado a la plataforma corporativa MIHSystem.</p>
+                        <p><strong>3. Base Legal:</strong> El tratamiento de datos que se derive de relaciones comerciales u operativas se rige por la Ley N° 19.628 sobre Protección de la Vida Privada (actualizada por la Ley 21.719).</p>
                         <p><strong>4. Derechos ARCO:</strong> Usted puede ejercer sus derechos de Acceso, Rectificación, Cancelación u Oposición enviando un correo a <a href="mailto:contacto@mih.cl" class="text-[#f59d02] font-semibold hover:underline" aria-label="Enviar correo para ejercicio de derechos ARCO">contacto@mih.cl</a>.</p>
                         <p><strong>5. Conservación:</strong> Los datos se almacenan en servidores seguros bajo altos estándares de la industria, durante el tiempo necesario para la prestación del servicio de gestión documental y operativo.</p>
                     </template>

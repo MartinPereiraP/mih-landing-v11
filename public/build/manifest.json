@@ -1,11 +1,11 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-C876x-oh.css",
+    "file": "assets/app-DaqlXxnX.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BP9lPRy1.js",
+    "file": "assets/app-BvCbHdtQ.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -14,11 +14,11 @@
       "resources/js/pages/Maintenance.vue"
     ],
     "css": [
-      "assets/app-C876x-oh.css"
+      "assets/app-DaqlXxnX.css"
     ]
   },
   "resources/js/pages/Landing.vue": {
-    "file": "assets/Landing-B7f-Hgk-.js",
+    "file": "assets/Landing-CfNQtt3L.js",
     "name": "Landing",
     "src": "resources/js/pages/Landing.vue",
     "isDynamicEntry": true,
@@ -27,11 +27,11 @@
     ],
     "css": [
       "assets/Landing-CLY4iuXT.css",
-      "assets/app-C876x-oh.css"
+      "assets/app-DaqlXxnX.css"
     ]
   },
   "resources/js/pages/Maintenance.vue": {
-    "file": "assets/Maintenance-B-UkxKFp.js",
+    "file": "assets/Maintenance-giNGrsVz.js",
     "name": "Maintenance",
     "src": "resources/js/pages/Maintenance.vue",
     "isDynamicEntry": true,
@@ -39,7 +39,7 @@
       "resources/js/app.js"
     ],
     "css": [
-      "assets/app-C876x-oh.css"
+      "assets/app-DaqlXxnX.css"
     ]
   }
 }
