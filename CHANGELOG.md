@@ -2,7 +2,6 @@
 
 ## [Sin liberar]
 ### Añadido
-- Formulario técnico de requerimiento aduanero B2B en `resources/js/pages/Landing.vue` para captura de operaciones de exportación (DUS), importación (DIN), aforos e integración con MIHSystem.
 - Módulo estructurado de cobertura nacional en zonas primarias aduaneras (marítimas, terrestres y aéreas) de Chile.
 - Inicialización de proyecto base en Laravel 11 (soporte PHP 8.2).
 - Configuración de Vue 3 + Inertia.js y assets compilados con Vite.
@@ -29,6 +28,7 @@
 - Compilación de assets para producción con Vite (`public/build/`).
 
 ### Eliminado
+- Supresión total del formulario web de contacto en `Landing.vue` para cumplimiento riguroso de la Ley 21.719 (sin captura ni almacenamiento de datos web), canalizando los requerimientos exclusivamente por medios directos (teléfono, email corporativo y plataforma MIHSystem).
 - Erradicación total del concepto y menciones a "Freight Forwarder" e intermediación de fletes internacionales, así como promesas ajenas de sobrecostos o control de demurrages.
 - Archivo muerto `resources/views/welcome.blade.php` (remanente tradicional de Laravel no utilizado en la arquitectura Inertia.js).
 - Componentes redundantes `Welcome.vue` y `Welcome.original.vue` en favor de la nomenclatura explícita (`Maintenance.vue` y `Landing.vue`).
