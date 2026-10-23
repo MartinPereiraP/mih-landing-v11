@@ -14,8 +14,8 @@ class SeoRoutesTest extends TestCase
 
         // Layout y Metas
         $response->assertSee('lang="es-CL"', false);
-        $response->assertSee('MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile', false);
-        $response->assertSee('Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS', false);
+        $response->assertSee('MIH | Agencia de Embarques y Tramitación Documental Aduanera en Chile', false);
+        $response->assertSee('Agencia de Embarques en Chile especializada en tramitación documental aduanera DIN y DUS', false);
         $response->assertSee('rel="canonical"', false);
         $response->assertSee('name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"', false);
 

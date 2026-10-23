@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- Primaria SEO -->
-        <title inertia>MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile</title>
-        <meta name="description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL.">
+        <title inertia>MIH | Agencia de Embarques y Tramitación Documental Aduanera en Chile</title>
+        <meta name="description" content="Agencia de Embarques en Chile especializada en tramitación documental aduanera DIN y DUS, visaciones, asistencia en aforos en zonas primarias (marítimas, terrestres y aéreas) y plataforma digital MIHSystem.">
         <link rel="canonical" href="{{ url()->current() }}">
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
@@ -19,8 +19,8 @@
         <!-- Open Graph / Redes Sociales -->
         <meta property="og:locale" content="es_CL">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile">
-        <meta property="og:description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL.">
+        <meta property="og:title" content="MIH | Agencia de Embarques y Tramitación Documental Aduanera en Chile">
+        <meta property="og:description" content="Agencia de Embarques en Chile especializada en tramitación documental aduanera DIN y DUS, visaciones, asistencia en aforos en zonas primarias (marítimas, terrestres y aéreas) y plataforma digital MIHSystem.">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:site_name" content="Agencia de Embarques MIH">
         <meta property="og:image" content="{{ asset('resources/images/logo-mih.png') }}">
@@ -28,12 +28,12 @@
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="512">
         <meta property="og:image:height" content="512">
-        <meta property="og:image:alt" content="Agencia de Embarques MIH SpA - Logotipo y Comercio Exterior">
+        <meta property="og:image:alt" content="Agencia de Embarques MIH SpA - Tramitación Aduanera y Comercio Exterior">
 
         <!-- Twitter Cards -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile">
-        <meta name="twitter:description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL.">
+        <meta name="twitter:title" content="MIH | Agencia de Embarques y Tramitación Documental Aduanera en Chile">
+        <meta name="twitter:description" content="Agencia de Embarques en Chile especializada en tramitación documental aduanera DIN y DUS, visaciones, asistencia en aforos en zonas primarias y plataforma digital MIHSystem.">
         <meta name="twitter:image" content="{{ asset('resources/images/logo-mih.png') }}">
         <meta name="twitter:image:alt" content="Agencia de Embarques MIH SpA">
 
@@ -63,7 +63,7 @@
                 "caption": "Agencia de Embarques MIH SpA"
               },
               "image": "https://mih.cl/resources/images/logo-mih.png",
-              "description": "Agencia de Embarques y Freight Forwarder en Chile. Especialistas en comercio exterior, tramitación aduanera (DIN/DUS) y transporte marítimo, aéreo y terrestre.",
+              "description": "Agencia de Embarques en Chile especializada en tramitación documental aduanera (DIN/DUS), visaciones, asistencia en aforos en zonas primarias y digitalización de carpetas de despacho.",
               "telephone": "+56323423242",
               "email": "contacto@mih.cl",
               "address": {
@@ -80,88 +80,54 @@
                 "longitude": -71.6238
               },
               "areaServed": [
-                {
-                  "@type": "Country",
-                  "name": "Chile"
-                },
-                {
-                  "@type": "AdministrativeArea",
-                  "name": "Puerto de Valparaíso"
-                },
-                {
-                  "@type": "AdministrativeArea",
-                  "name": "Puerto de San Antonio"
-                },
-                {
-                  "@type": "Airport",
-                  "name": "Aeropuerto Internacional Arturo Merino Benítez (SCL)"
-                }
+                { "@type": "Country", "name": "Chile" },
+                { "@type": "AdministrativeArea", "name": "Puerto de Valparaíso (ZEAL)" },
+                { "@type": "AdministrativeArea", "name": "Puerto de San Antonio" },
+                { "@type": "AdministrativeArea", "name": "Puerto Terrestre Los Andes" },
+                { "@type": "AdministrativeArea", "name": "Puertos del Biobío (Talcahuano, San Vicente, Coronel, Lirquén)" },
+                { "@type": "Airport", "name": "Aeropuerto Internacional Arturo Merino Benítez (SCL)" }
               ],
               "knowsAbout": [
                 "Comercio Exterior",
                 "Agencia de Embarques",
-                "Freight Forwarding",
-                "Agenciamiento Aduanero",
-                "Transporte Marítimo FCL y LCL",
-                "Transporte Aéreo de Carga",
+                "Tramitación Documental Aduanera",
+                "Declaración de Ingreso (DIN)",
+                "Declaración Única de Salida (DUS)",
+                "Aforos e Inspecciones en Zona Primaria",
                 "Normativa Aduanera Chilena",
-                "Tramitación DIN y DUS"
+                "Plataforma Digital MIHSystem"
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "Servicios de Comercio Exterior y Logística Internacional",
+                "name": "Servicios de Gestión Documental Aduanera y Soporte Operativo",
                 "itemListElement": [
                   {
-                    "@type": "OfferCatalog",
-                    "name": "Embarques Marítimos FCL y LCL",
-                    "itemListElement": [
-                      {
-                        "@type": "Service",
-                        "@id": "https://mih.cl/#servicio-maritimo",
-                        "name": "Embarques y Transporte Marítimo (FCL / LCL)",
-                        "description": "Agenciamiento y coordinación integral de carga marítima en contenedores completos (FCL) y carga consolidada (LCL) en puertos de Valparaíso, San Antonio y terminales de Chile.",
-                        "provider": { "@id": "https://mih.cl/#organization" }
-                      }
-                    ]
+                    "@type": "Service",
+                    "@id": "https://mih.cl/#servicio-exportacion",
+                    "name": "Tramitación Documental de Exportación (DUS)",
+                    "description": "Confección, revisión y tramitación de la Declaración Única de Salida (DUS), visaciones, legalizaciones y conformación del set documental de embarque ante el Servicio Nacional de Aduanas.",
+                    "provider": { "@id": "https://mih.cl/#organization" }
                   },
                   {
-                    "@type": "OfferCatalog",
-                    "name": "Transporte Aéreo de Carga",
-                    "itemListElement": [
-                      {
-                        "@type": "Service",
-                        "@id": "https://mih.cl/#servicio-aereo",
-                        "name": "Carga Aérea Internacional",
-                        "description": "Gestión logística de envíos aéreos de alta prioridad y carga crítica a través del Aeropuerto Internacional Arturo Merino Benítez (SCL).",
-                        "provider": { "@id": "https://mih.cl/#organization" }
-                      }
-                    ]
+                    "@type": "Service",
+                    "@id": "https://mih.cl/#servicio-importacion",
+                    "name": "Tramitación Documental de Importación (DIN)",
+                    "description": "Revisión técnica de carpetas base para la Declaración de Ingreso (DIN), cotejo documental previo (facturas, conocimientos de embarque, certificados) y coordinación de desaduanamiento.",
+                    "provider": { "@id": "https://mih.cl/#organization" }
                   },
                   {
-                    "@type": "OfferCatalog",
-                    "name": "Logística Terrestre Nacional e Internacional",
-                    "itemListElement": [
-                      {
-                        "@type": "Service",
-                        "@id": "https://mih.cl/#servicio-terrestre",
-                        "name": "Logística y Transporte Terrestre",
-                        "description": "Transporte terrestre de carga y coordinación intermodal entre puertos, extraportuarios, pasos fronterizos (Los Andes, Pino Hachado) y centros de distribución.",
-                        "provider": { "@id": "https://mih.cl/#organization" }
-                      }
-                    ]
+                    "@type": "Service",
+                    "@id": "https://mih.cl/#servicio-aforos",
+                    "name": "Asistencia y Acompañamiento en Zona Primaria (Aforos)",
+                    "description": "Auxiliares acreditados en terreno para asistencia en aforos aduaneros (físicos y documentales), verificación de sellos y coordinación de inspecciones SAG, Sernapesca e ISP en puertos, pasos terrestres y aeropuerto SCL.",
+                    "provider": { "@id": "https://mih.cl/#organization" }
                   },
                   {
-                    "@type": "OfferCatalog",
-                    "name": "Asesoría y Gestión Aduanera",
-                    "itemListElement": [
-                      {
-                        "@type": "Service",
-                        "@id": "https://mih.cl/#servicio-aduanero",
-                        "name": "Asesoría y Gestión Aduanera (DIN / DUS)",
-                        "description": "Tramitación documental de Declaraciones de Ingreso (DIN), Declaraciones Únicas de Salida (DUS), visaciones, inspecciones SAG/Sernapesca y supervisión física en zona primaria.",
-                        "provider": { "@id": "https://mih.cl/#organization" }
-                      }
-                    ]
+                    "@type": "Service",
+                    "@id": "https://mih.cl/#servicio-mihsystem",
+                    "name": "Ecosistema Digital y Trazabilidad (MIHSystem)",
+                    "description": "Repositorio seguro en la nube para consulta, descarga y auditoría 24/7 de carpetas de despacho aduanero digitalizadas, conforme a la Ley 21.719.",
+                    "provider": { "@id": "https://mih.cl/#organization" }
                   }
                 ]
               }
@@ -171,7 +137,7 @@
               "@id": "https://mih.cl/#website",
               "url": "https://mih.cl",
               "name": "Agencia de Embarques MIH SpA",
-              "description": "Agencia de Embarques, Comercio Exterior y Gestión Aduanera en Chile",
+              "description": "Agencia de Embarques y Tramitación Documental Aduanera en Chile",
               "publisher": {
                 "@id": "https://mih.cl/#organization"
               },
@@ -183,42 +149,42 @@
               "mainEntity": [
                 {
                   "@type": "Question",
-                  "name": "¿Qué servicios ofrece Agencia de Embarques MIH en Chile?",
+                  "name": "¿Qué servicios realiza Agencia de Embarques MIH SpA en Chile?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Agencia de Embarques MIH SpA ofrece coordinación integral de transporte internacional marítimo (FCL/LCL), aéreo y terrestre, agenciamiento aduanero (tramitación DIN y DUS), visaciones, inspección física en zona primaria y supervisión documental en los principales puertos y terminales del país."
+                    "text": "Agencia de Embarques MIH SpA está especializada en la tramitación documental aduanera para operaciones de comercio exterior (confección y tramitación de DUS para exportación y DIN para importación), visaciones, conformación de sets documentales de embarque, asistencia presencial en aforos aduaneros en zonas primarias y digitalización de carpetas de despacho a través de la plataforma MIHSystem."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "¿En qué puertos y terminales aduaneros opera MIH?",
+                  "name": "¿MIH SpA actúa como Freight Forwarder o comercializa fletes internacionales?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Operamos en los principales nodos logísticos de Chile: puertos de Valparaíso (incluyendo ZEAL), San Antonio, Talcahuano, San Vicente, Lirquén y Coronel; Aeropuerto Internacional Arturo Merino Benítez (SCL); y pasos fronterizos terrestres como Los Andes y Pino Hachado."
+                    "text": "No. MIH SpA no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "¿Cómo gestiona MIH la tramitación aduanera de importación y exportación (DIN / DUS)?",
+                  "name": "¿En qué zonas primarias (marítimas, terrestres y aéreas) opera MIH a nivel nacional?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Supervisamos la preparación y revisión de carpetas de despacho, visaciones y tramitación de Declaraciones de Ingreso (DIN) y Declaraciones Únicas de Salida (DUS), coordinando aforos en zona primaria e inspecciones SAG/Sernapesca para evitar sobreestadías y sobrecostos."
+                    "text": "Operamos en los principales nodos aduaneros de Chile: terminales marítimos de Valparaíso (Matriz & ZEAL), San Antonio, Coquimbo, Talcahuano, San Vicente, Lirquén y Coronel; recintos aduaneros terrestres como Los Andes (PTLA), Arica (Chacalluta), Pino Hachado y Cardenal Samoré; y el recinto aéreo del Aeropuerto Internacional Arturo Merino Benítez (SCL)."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "¿Qué ventajas diferenciales ofrece MIH frente a otros operadores logísticos?",
+                  "name": "¿En qué consiste el apoyo de MIH durante los aforos aduaneros en zona primaria?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Más de 20 años de experiencia técnica en terreno, acceso 24/7 a carpetas digitales a través de la plataforma MIHSystem y estricto cumplimiento de la Ley 21.719 de Protección de Datos Personales en Chile."
+                    "text": "Nuestro equipo de auxiliares en terreno acompaña y asiste las revisiones físicas y documentales dictaminadas por el Servicio Nacional de Aduanas, coordinando con los terminales portuarios y organismos fiscalizadores (SAG, Sernapesca, ISP) para la verificación de sellos e integridad del despacho."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "¿Qué modalidades de transporte internacional de carga gestionan?",
+                  "name": "¿Cómo acceden las agencias y empresas a sus carpetas de despacho digitalizadas?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Gestionamos transporte marítimo FCL (Full Container Load) y LCL (Less than Container Load), transporte aéreo de carga crítica por SCL y transporte terrestre nacional e internacional intermodal."
+                    "text": "A través de nuestra plataforma corporativa MIHSystem (https://mihsystem.cl), clientes y agencias de aduana aliadas pueden consultar, descargar y auditar en tiempo real sus carpetas de despacho y estados aduaneros las 24 horas del día, bajo el marco de la Ley 21.719 de Protección de Datos Personales."
                   }
                 }
               ]

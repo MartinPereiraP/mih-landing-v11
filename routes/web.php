@@ -3,12 +3,17 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Ruta pública: Sitio en Mantenimiento
+// Modo Mantenimiento (comentado para fácil reactivación si se requiere):
+// Route::get('/', function () {
+//     return Inertia::render('Maintenance');
+// });
+
+// Ruta pública principal: Landing Page oficial
 Route::get('/', function () {
-    return Inertia::render('Maintenance');
+    return Inertia::render('Landing');
 });
 
-// Ruta privada para revisar y pulir la Landing Page oficial
+// Ruta preview mantenida para acceso directo y retrocompatibilidad
 Route::get('/preview', function () {
     return Inertia::render('Landing');
 });
