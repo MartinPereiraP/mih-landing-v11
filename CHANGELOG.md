@@ -2,6 +2,8 @@
 
 ## [Sin liberar]
 ### Añadido
+- Formulario técnico de requerimiento aduanero B2B en `resources/js/pages/Landing.vue` para captura de operaciones de exportación (DUS), importación (DIN), aforos e integración con MIHSystem.
+- Módulo estructurado de cobertura nacional en zonas primarias aduaneras (marítimas, terrestres y aéreas) de Chile.
 - Inicialización de proyecto base en Laravel 11 (soporte PHP 8.2).
 - Configuración de Vue 3 + Inertia.js y assets compilados con Vite.
 - Pantalla de mantenimiento moderna en Vue (`Welcome.vue`).
@@ -19,7 +21,13 @@
 - Componente `Landing.vue` y ruta privada `/preview` para revisar y pulir la landing page oficial.
 - Prueba automatizada para la ruta `/preview` en `tests/Feature/SeoRoutesTest.php`.
 
+### Modificado
+- Refactorización integral de `resources/js/pages/Landing.vue` adaptada a la identidad y servicios reales de Agencia de Embarques MIH SpA.
+- Actualización de metadatos Schema.org (`LocalBusiness`, `Service`, `OfferCatalog`, `FAQPage`) reflejando tramitación de DUS/DIN, asistencia en aforos y soporte digital en MIHSystem.
+- Compilación de assets para producción con Vite (`public/build/`).
+
 ### Eliminado
+- Erradicación total del concepto y menciones a "Freight Forwarder" e intermediación de fletes internacionales, así como promesas ajenas de sobrecostos o control de demurrages.
 - Archivo muerto `resources/views/welcome.blade.php` (remanente tradicional de Laravel no utilizado en la arquitectura Inertia.js).
 - Componentes redundantes `Welcome.vue` y `Welcome.original.vue` en favor de la nomenclatura explícita (`Maintenance.vue` y `Landing.vue`).
 - Desindexación de la carpeta de IA `.agents/` del seguimiento de Git e inclusión en `.gitignore` para mantener el repositorio limpio y neutral.
