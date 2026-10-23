@@ -16,8 +16,8 @@ Sitio web corporativo y plataforma de presencia digital para **Agencia de Embarq
 
 ## 🧭 Estructura de Rutas y Páginas
 
-- **`/`**: Pantalla pública temporal de mantenimiento activo (`resources/js/pages/Maintenance.vue`).
-- **`/preview`**: Vista previa privada de la Landing Page corporativa oficial (`resources/js/pages/Landing.vue`).
+- **`/`**: Landing Page corporativa oficial (`resources/js/pages/Landing.vue`).
+- **`/preview`**: Vista directa mantenida para acceso o revisiones (`resources/js/pages/Landing.vue`).
 - **`/robots.txt`**: Generado dinámicamente con directivas de indexación y enlace al sitemap.
 - **`/sitemap.xml`**: Generado dinámicamente con cabeceras `application/xml` y caché optimizada.
 

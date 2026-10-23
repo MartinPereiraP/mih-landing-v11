@@ -22,6 +22,8 @@
 - Prueba automatizada para la ruta `/preview` en `tests/Feature/SeoRoutesTest.php`.
 
 ### Modificado
+- Activación pública de la Landing Page oficial en la ruta raíz (`/`), retirando la pantalla de mantenimiento para visualización directa en producción.
+- Sincronización de metadatos SEO y Schema.org en `resources/views/app.blade.php` y suite de pruebas `tests/Feature/SeoRoutesTest.php`.
 - Refactorización integral de `resources/js/pages/Landing.vue` adaptada a la identidad y servicios reales de Agencia de Embarques MIH SpA.
 - Actualización de metadatos Schema.org (`LocalBusiness`, `Service`, `OfferCatalog`, `FAQPage`) reflejando tramitación de DUS/DIN, asistencia en aforos y soporte digital en MIHSystem.
 - Compilación de assets para producción con Vite (`public/build/`).
