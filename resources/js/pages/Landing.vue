@@ -13,26 +13,57 @@ const toggleFaq = (index: number) => {
 
 const faqs = [
     {
-        q: '¿Qué servicios ofrece una Agencia de Embarques (Freight Forwarder) como MIH en Chile?',
-        a: 'Agencia de Embarques MIH SpA ofrece coordinación integral de transporte internacional marítimo (FCL/LCL), aéreo y terrestre, agenciamiento aduanero (tramitación DIN y DUS), visaciones, inspección física en zona primaria y supervisión documental en los principales puertos y terminales del país.'
+        q: '¿Qué servicios realiza Agencia de Embarques MIH SpA en Chile?',
+        a: 'Agencia de Embarques MIH SpA está especializada en la tramitación documental aduanera para operaciones de comercio exterior (confección y tramitación de DUS para exportación y DIN para importación), visaciones, conformación de sets documentales de embarque, asistencia presencial en aforos aduaneros en zonas primarias y digitalización de carpetas de despacho a través de la plataforma MIHSystem.'
     },
     {
-        q: '¿En qué puertos y terminales aduaneros opera Agencia de Embarques MIH?',
-        a: 'Operamos en los principales nodos logísticos de Chile: puertos de Valparaíso (incluyendo ZEAL), San Antonio, Talcahuano, San Vicente, Lirquén y Coronel; Aeropuerto Internacional Arturo Merino Benítez (SCL); y pasos fronterizos terrestres como Los Andes y Pino Hachado.'
+        q: '¿MIH SpA actúa como Freight Forwarder o comercializa fletes internacionales?',
+        a: 'No. MIH SpA no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores.'
     },
     {
-        q: '¿Cómo gestiona MIH la tramitación aduanera de importación y exportación (DIN / DUS)?',
-        a: 'Supervisamos la preparación y revisión de carpetas de despacho, visaciones y tramitación de Declaraciones de Ingreso (DIN) y Declaraciones Únicas de Salida (DUS), coordinando aforos en zona primaria e inspecciones SAG/Sernapesca para evitar sobreestadías y sobrecostos.'
+        q: '¿En qué zonas primarias (marítimas, terrestres y aéreas) opera MIH a nivel nacional?',
+        a: 'Operamos en los principales nodos aduaneros de Chile: terminales marítimos de Valparaíso (Matriz & ZEAL), San Antonio, Coquimbo, Talcahuano, San Vicente, Lirquén y Coronel; recintos aduaneros terrestres como Los Andes (PTLA), Arica (Chacalluta), Pino Hachado y Cardenal Samoré; y el recinto aéreo del Aeropuerto Internacional Arturo Merino Benítez (SCL).'
     },
     {
-        q: '¿Qué ventajas ofrece MIH frente a otros operadores logísticos?',
-        a: 'Más de 20 años de experiencia técnica en terreno, acceso 24/7 a carpetas digitales a través de la plataforma MIHSystem y estricto cumplimiento de la Ley 21.719 de Protección de Datos Personales en Chile.'
+        q: '¿En qué consiste el apoyo de MIH durante los aforos aduaneros en zona primaria?',
+        a: 'Nuestro equipo de auxiliares en terreno acompaña y asiste las revisiones físicas y documentales dictaminadas por el Servicio Nacional de Aduanas, coordinando con los terminales portuarios y organismos fiscalizadores (SAG, Sernapesca, ISP) para la verificación de sellos e integridad del despacho.'
     },
     {
-        q: '¿Qué modalidades de transporte internacional de carga gestionan?',
-        a: 'Gestionamos transporte marítimo FCL (Full Container Load) y LCL (Less than Container Load), transporte aéreo de carga crítica por SCL y transporte terrestre nacional e internacional intermodal.'
+        q: '¿Cómo acceden las agencias y empresas a sus carpetas de despacho digitalizadas?',
+        a: 'A través de nuestra plataforma corporativa MIHSystem (https://mihsystem.cl), clientes y agencias de aduana aliadas pueden consultar, descargar y auditar en tiempo real sus carpetas de despacho y estados aduaneros las 24 horas del día, bajo el marco de la Ley 21.719 de Protección de Datos Personales.'
     }
 ];
+
+// Formulario de Contacto B2B para Empresas y Agencias de Aduana
+const form = ref({
+    companyName: '',
+    rut: '',
+    contactName: '',
+    email: '',
+    phone: '',
+    serviceType: 'Tramitación Exportación (DUS)',
+    customsZone: 'Valparaíso (Matriz & ZEAL)',
+    details: ''
+});
+const formSent = ref(false);
+
+const submitContactForm = () => {
+    const subject = encodeURIComponent(`[Requerimiento Aduanero B2B] ${form.value.companyName} (${form.value.rut}) - ${form.value.serviceType}`);
+    const body = encodeURIComponent(
+        `Solicitud de Gestión Aduanera - Agencia de Embarques MIH SpA\n` +
+        `==================================================\n\n` +
+        `Razón Social / Agencia: ${form.value.companyName}\n` +
+        `RUT Empresa: ${form.value.rut}\n` +
+        `Nombre de Contacto: ${form.value.contactName}\n` +
+        `Email Corporativo: ${form.value.email}\n` +
+        `Teléfono: ${form.value.phone}\n` +
+        `Tipo de Trámite: ${form.value.serviceType}\n` +
+        `Zona Primaria / Aduana: ${form.value.customsZone}\n\n` +
+        `Detalle del Despacho / Requerimiento:\n${form.value.details}\n`
+    );
+    window.location.href = `mailto:contacto@mih.cl?subject=${subject}&body=${body}`;
+    formSent.value = true;
+};
 
 const acceptCookies = () => {
     localStorage.setItem('cookies_accepted', 'true');
@@ -80,8 +111,8 @@ onUnmounted(() => {
 
 <template>
     <Head>
-        <title>MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile</title>
-        <meta name="description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL." />
+        <title>MIH | Agencia de Embarques y Tramitación Documental Aduanera en Chile</title>
+        <meta name="description" content="Agencia de Embarques en Chile especializada en tramitación documental aduanera DIN y DUS, visaciones, asistencia en aforos en zonas primarias (marítimas, terrestres y aéreas) y plataforma digital MIHSystem." />
         <link rel="canonical" href="https://mih.cl" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
@@ -95,20 +126,20 @@ onUnmounted(() => {
         <meta property="og:locale" content="es_CL" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://mih.cl" />
-        <meta property="og:title" content="MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile" />
-        <meta property="og:description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL." />
+        <meta property="og:title" content="MIH | Agencia de Embarques y Tramitación Documental Aduanera en Chile" />
+        <meta property="og:description" content="Agencia de Embarques en Chile especializada en tramitación documental aduanera DIN y DUS, visaciones, asistencia en aforos en zonas primarias (marítimas, terrestres y aéreas) y plataforma digital MIHSystem." />
         <meta property="og:site_name" content="Agencia de Embarques MIH" />
         <meta property="og:image" content="https://mih.cl/resources/images/logo-mih.png" />
         <meta property="og:image:secure_url" content="https://mih.cl/resources/images/logo-mih.png" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="512" />
         <meta property="og:image:height" content="512" />
-        <meta property="og:image:alt" content="Agencia de Embarques MIH SpA - Logotipo y Comercio Exterior" />
+        <meta property="og:image:alt" content="Agencia de Embarques MIH SpA - Tramitación Aduanera y Comercio Exterior" />
 
         <!-- Twitter Cards -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="MIH | Agencia de Embarques, Comercio Exterior y Logística en Chile" />
-        <meta name="twitter:description" content="Agencia de Embarques y Comercio Exterior en Chile. Gestión aduanera DIN/DUS, transporte marítimo FCL/LCL, aéreo y terrestre en Valparaíso, San Antonio y SCL." />
+        <meta name="twitter:title" content="MIH | Agencia de Embarques y Tramitación Documental Aduanera en Chile" />
+        <meta name="twitter:description" content="Agencia de Embarques en Chile especializada en tramitación documental aduanera DIN y DUS, visaciones, asistencia en aforos en zonas primarias y plataforma digital MIHSystem." />
         <meta name="twitter:image" content="https://mih.cl/resources/images/logo-mih.png" />
         <meta name="twitter:image:alt" content="Agencia de Embarques MIH SpA" />
 
@@ -131,7 +162,7 @@ onUnmounted(() => {
                 "caption": "Agencia de Embarques MIH SpA"
               },
               "image": "https://mih.cl/resources/images/logo-mih.png",
-              "description": "Agencia de Embarques y Freight Forwarder en Chile. Especialistas en comercio exterior, tramitación aduanera (DIN/DUS) y transporte marítimo, aéreo y terrestre.",
+              "description": "Agencia de Embarques en Chile especializada en tramitación documental aduanera (DIN/DUS), visaciones, asistencia en aforos en zonas primarias y digitalización de carpetas de despacho.",
               "telephone": "+56323423242",
               "email": "contacto@mih.cl",
               "address": {
@@ -148,88 +179,54 @@ onUnmounted(() => {
                 "longitude": -71.6238
               },
               "areaServed": [
-                {
-                  "@type": "Country",
-                  "name": "Chile"
-                },
-                {
-                  "@type": "AdministrativeArea",
-                  "name": "Puerto de Valparaíso"
-                },
-                {
-                  "@type": "AdministrativeArea",
-                  "name": "Puerto de San Antonio"
-                },
-                {
-                  "@type": "Airport",
-                  "name": "Aeropuerto Internacional Arturo Merino Benítez (SCL)"
-                }
+                { "@type": "Country", "name": "Chile" },
+                { "@type": "AdministrativeArea", "name": "Puerto de Valparaíso (ZEAL)" },
+                { "@type": "AdministrativeArea", "name": "Puerto de San Antonio" },
+                { "@type": "AdministrativeArea", "name": "Puerto Terrestre Los Andes" },
+                { "@type": "AdministrativeArea", "name": "Puertos del Biobío (Talcahuano, San Vicente, Coronel, Lirquén)" },
+                { "@type": "Airport", "name": "Aeropuerto Internacional Arturo Merino Benítez (SCL)" }
               ],
               "knowsAbout": [
                 "Comercio Exterior",
                 "Agencia de Embarques",
-                "Freight Forwarding",
-                "Agenciamiento Aduanero",
-                "Transporte Marítimo FCL y LCL",
-                "Transporte Aéreo de Carga",
+                "Tramitación Documental Aduanera",
+                "Declaración de Ingreso (DIN)",
+                "Declaración Única de Salida (DUS)",
+                "Aforos e Inspecciones en Zona Primaria",
                 "Normativa Aduanera Chilena",
-                "Tramitación DIN y DUS"
+                "Plataforma Digital MIHSystem"
               ],
               "hasOfferCatalog": {
                 "@type": "OfferCatalog",
-                "name": "Servicios de Comercio Exterior y Logística Internacional",
+                "name": "Servicios de Gestión Documental Aduanera y Soporte Operativo",
                 "itemListElement": [
                   {
-                    "@type": "OfferCatalog",
-                    "name": "Embarques Marítimos FCL y LCL",
-                    "itemListElement": [
-                      {
-                        "@type": "Service",
-                        "@id": "https://mih.cl/#servicio-maritimo",
-                        "name": "Embarques y Transporte Marítimo (FCL / LCL)",
-                        "description": "Agenciamiento y coordinación integral de carga marítima en contenedores completos (FCL) y carga consolidada (LCL) en puertos de Valparaíso, San Antonio y terminales de Chile.",
-                        "provider": { "@id": "https://mih.cl/#organization" }
-                      }
-                    ]
+                    "@type": "Service",
+                    "@id": "https://mih.cl/#servicio-exportacion",
+                    "name": "Tramitación Documental de Exportación (DUS)",
+                    "description": "Confección, revisión y tramitación de la Declaración Única de Salida (DUS), visaciones, legalizaciones y conformación del set documental de embarque ante el Servicio Nacional de Aduanas.",
+                    "provider": { "@id": "https://mih.cl/#organization" }
                   },
                   {
-                    "@type": "OfferCatalog",
-                    "name": "Transporte Aéreo de Carga",
-                    "itemListElement": [
-                      {
-                        "@type": "Service",
-                        "@id": "https://mih.cl/#servicio-aereo",
-                        "name": "Carga Aérea Internacional",
-                        "description": "Gestión logística de envíos aéreos de alta prioridad y carga crítica a través del Aeropuerto Internacional Arturo Merino Benítez (SCL).",
-                        "provider": { "@id": "https://mih.cl/#organization" }
-                      }
-                    ]
+                    "@type": "Service",
+                    "@id": "https://mih.cl/#servicio-importacion",
+                    "name": "Tramitación Documental de Importación (DIN)",
+                    "description": "Revisión técnica de carpetas base para la Declaración de Ingreso (DIN), cotejo documental previo (facturas, conocimientos de embarque, certificados) y coordinación de desaduanamiento.",
+                    "provider": { "@id": "https://mih.cl/#organization" }
                   },
                   {
-                    "@type": "OfferCatalog",
-                    "name": "Logística Terrestre Nacional e Internacional",
-                    "itemListElement": [
-                      {
-                        "@type": "Service",
-                        "@id": "https://mih.cl/#servicio-terrestre",
-                        "name": "Logística y Transporte Terrestre",
-                        "description": "Transporte terrestre de carga y coordinación intermodal entre puertos, extraportuarios, pasos fronterizos (Los Andes, Pino Hachado) y centros de distribución.",
-                        "provider": { "@id": "https://mih.cl/#organization" }
-                      }
-                    ]
+                    "@type": "Service",
+                    "@id": "https://mih.cl/#servicio-aforos",
+                    "name": "Asistencia y Acompañamiento en Zona Primaria (Aforos)",
+                    "description": "Auxiliares acreditados en terreno para asistencia en aforos aduaneros (físicos y documentales), verificación de sellos y coordinación de inspecciones SAG, Sernapesca e ISP en puertos, pasos terrestres y aeropuerto SCL.",
+                    "provider": { "@id": "https://mih.cl/#organization" }
                   },
                   {
-                    "@type": "OfferCatalog",
-                    "name": "Asesoría y Gestión Aduanera",
-                    "itemListElement": [
-                      {
-                        "@type": "Service",
-                        "@id": "https://mih.cl/#servicio-aduanero",
-                        "name": "Asesoría y Gestión Aduanera (DIN / DUS)",
-                        "description": "Tramitación documental de Declaraciones de Ingreso (DIN), Declaraciones Únicas de Salida (DUS), visaciones, inspecciones SAG/Sernapesca y supervisión física en zona primaria.",
-                        "provider": { "@id": "https://mih.cl/#organization" }
-                      }
-                    ]
+                    "@type": "Service",
+                    "@id": "https://mih.cl/#servicio-mihsystem",
+                    "name": "Ecosistema Digital y Trazabilidad (MIHSystem)",
+                    "description": "Repositorio seguro en la nube para consulta, descarga y auditoría 24/7 de carpetas de despacho aduanero digitalizadas, conforme a la Ley 21.719.",
+                    "provider": { "@id": "https://mih.cl/#organization" }
                   }
                 ]
               }
@@ -239,7 +236,7 @@ onUnmounted(() => {
               "@id": "https://mih.cl/#website",
               "url": "https://mih.cl",
               "name": "Agencia de Embarques MIH SpA",
-              "description": "Agencia de Embarques, Comercio Exterior y Gestión Aduanera en Chile",
+              "description": "Agencia de Embarques y Tramitación Documental Aduanera en Chile",
               "publisher": {
                 "@id": "https://mih.cl/#organization"
               },
@@ -251,42 +248,42 @@ onUnmounted(() => {
               "mainEntity": [
                 {
                   "@type": "Question",
-                  "name": "¿Qué servicios ofrece Agencia de Embarques MIH en Chile?",
+                  "name": "¿Qué servicios realiza Agencia de Embarques MIH SpA en Chile?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Agencia de Embarques MIH SpA ofrece coordinación integral de transporte internacional marítimo (FCL/LCL), aéreo y terrestre, agenciamiento aduanero (tramitación DIN y DUS), visaciones, inspección física en zona primaria y supervisión documental en los principales puertos y terminales del país."
+                    "text": "Agencia de Embarques MIH SpA está especializada en la tramitación documental aduanera para operaciones de comercio exterior (confección y tramitación de DUS para exportación y DIN para importación), visaciones, conformación de sets documentales de embarque, asistencia presencial en aforos aduaneros en zonas primarias y digitalización de carpetas de despacho a través de la plataforma MIHSystem."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "¿En qué puertos y terminales aduaneros opera MIH?",
+                  "name": "¿MIH SpA actúa como Freight Forwarder o comercializa fletes internacionales?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Operamos en los principales nodos logísticos de Chile: puertos de Valparaíso (incluyendo ZEAL), San Antonio, Talcahuano, San Vicente, Lirquén y Coronel; Aeropuerto Internacional Arturo Merino Benítez (SCL); y pasos fronterizos terrestres como Los Andes y Pino Hachado."
+                    "text": "No. MIH SpA no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "¿Cómo gestiona MIH la tramitación aduanera de importación y exportación (DIN / DUS)?",
+                  "name": "¿En qué zonas primarias (marítimas, terrestres y aéreas) opera MIH a nivel nacional?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Supervisamos la preparación y revisión de carpetas de despacho, visaciones y tramitación de Declaraciones de Ingreso (DIN) y Declaraciones Únicas de Salida (DUS), coordinando aforos en zona primaria e inspecciones SAG/Sernapesca para evitar sobreestadías y sobrecostos."
+                    "text": "Operamos en los principales nodos aduaneros de Chile: terminales marítimos de Valparaíso (Matriz & ZEAL), San Antonio, Coquimbo, Talcahuano, San Vicente, Lirquén y Coronel; recintos aduaneros terrestres como Los Andes (PTLA), Arica (Chacalluta), Pino Hachado y Cardenal Samoré; y el recinto aéreo del Aeropuerto Internacional Arturo Merino Benítez (SCL)."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "¿Qué ventajas diferenciales ofrece MIH frente a otros operadores logísticos?",
+                  "name": "¿En qué consiste el apoyo de MIH durante los aforos aduaneros en zona primaria?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Más de 20 años de experiencia técnica en terreno, acceso 24/7 a carpetas digitales a través de la plataforma MIHSystem y estricto cumplimiento de la Ley 21.719 de Protección de Datos Personales en Chile."
+                    "text": "Nuestro equipo de auxiliares en terreno acompaña y asiste las revisiones físicas y documentales dictaminadas por el Servicio Nacional de Aduanas, coordinando con los terminales portuarios y organismos fiscalizadores (SAG, Sernapesca, ISP) para la verificación de sellos e integridad del despacho."
                   }
                 },
                 {
                   "@type": "Question",
-                  "name": "¿Qué modalidades de transporte internacional de carga gestionan?",
+                  "name": "¿Cómo acceden las agencias y empresas a sus carpetas de despacho digitalizadas?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Gestionamos transporte marítimo FCL (Full Container Load) y LCL (Less than Container Load), transporte aéreo de carga crítica por SCL y transporte terrestre nacional e internacional intermodal."
+                    "text": "A través de nuestra plataforma corporativa MIHSystem (https://mihsystem.cl), clientes y agencias de aduana aliadas pueden consultar, descargar y auditar en tiempo real sus carpetas de despacho y estados aduaneros las 24 horas del día, bajo el marco de la Ley 21.719 de Protección de Datos Personales."
                   }
                 }
               ]
@@ -309,7 +306,7 @@ onUnmounted(() => {
                 <a href="/" class="flex items-center gap-3" aria-label="Inicio - Agencia de Embarques MIH">
                     <img 
                         src="/img/logo-black.svg" 
-                        alt="Agencia de Embarques MIH - Comercio Exterior y Aduanas en Chile" 
+                        alt="Agencia de Embarques MIH - Tramitación Documental Aduanera en Chile" 
                         class="h-11 w-auto object-contain block dark:hidden"
                         fetchpriority="high"
                         loading="eager"
@@ -318,7 +315,7 @@ onUnmounted(() => {
                     >
                     <img 
                         src="/img/logo-white.svg" 
-                        alt="Agencia de Embarques MIH - Comercio Exterior y Aduanas en Chile" 
+                        alt="Agencia de Embarques MIH - Tramitación Documental Aduanera en Chile" 
                         class="h-11 w-auto object-contain hidden dark:block"
                         fetchpriority="high"
                         loading="eager"
@@ -328,10 +325,10 @@ onUnmounted(() => {
                 </a>
 
                 <nav class="hidden md:flex items-center gap-8" aria-label="Navegación principal">
-                    <a href="#operaciones" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a sección de Operaciones">Operaciones</a>
-                    <a href="#servicios" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a sección de Servicios">Servicios</a>
+                    <a href="#operaciones" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a sección de Operaciones en Zona Primaria">Zonas Primarias</a>
+                    <a href="#servicios" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a sección de Servicios Documentales">Servicios Documentales</a>
                     <a href="#faq" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a Preguntas Frecuentes">Preguntas Frecuentes</a>
-                    <a href="#contacto" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a sección de Contacto">Contacto</a>
+                    <a href="#contacto" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a sección de Contacto Operativo">Contacto</a>
 
                     <button 
                         @click="toggleDark" 
@@ -368,7 +365,7 @@ onUnmounted(() => {
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 rounded-full border border-dashed border-[#f59d02]/40 bg-[#f59d02]/5 backdrop-blur-md px-3 py-1 text-[11px] font-mono font-semibold tracking-wide text-[#f59d02] shadow-sm">
                         <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        Soporte Operativo Activo · Nodos Portuarios
+                        Soporte Operativo Activo · Red Nacional de Zonas Primarias
                     </div>
                     <p class="text-xs font-bold uppercase tracking-widest text-[#f59d02] mb-3">Equipo profesional con más de 20 años de trayectoria en tramitación aduanera y gestión de comercio exterior.</p>
                     
@@ -379,23 +376,23 @@ onUnmounted(() => {
                     </h1>
 
                     <p class="text-lg sm:text-xl text-slate-500 dark:text-slate-400 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed tracking-tight">
-                        Supervisamos el flujo crítico documental y operativo en los principales terminales de Chile, asegurando una tramitación ágil de despachos aduaneros y mitigando sobrecostos.
+                        Confeccionamos, visamos y tramitamos carpetas aduaneras de exportación (DUS) e importación (DIN), brindando asistencia presencial en aforos en zonas primarias y respaldo digital 24/7 en MIHSystem.
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
                         <a 
                             href="#contacto" 
                             class="rounded-full bg-[#f59d02] px-8 py-3.5 text-center text-[15px] font-medium text-white shadow-[0_8px_20px_rgba(245,157,2,0.3)] transition-all hover:scale-[1.02] hover:bg-[#e08f02]"
-                            aria-label="Comenzar operación y contactar con la mesa de operaciones de MIH"
+                            aria-label="Contactar a la mesa de operaciones de MIH"
                         >
-                            Comenzar Operación
+                            Contactar Operaciones
                         </a>
                         <a 
                             href="#servicios" 
                             class="rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 px-8 py-3.5 text-center text-[15px] font-medium text-slate-900 dark:text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-slate-50 dark:hover:bg-white/10"
-                            aria-label="Descubrir las soluciones y servicios logísticos de MIH"
+                            aria-label="Descubrir los servicios documentales aduaneros de MIH"
                         >
-                            Descubrir Servicios
+                            Servicios Documentales
                         </a>
                     </div>
                     
@@ -424,15 +421,15 @@ onUnmounted(() => {
                             <div class="rounded-2xl border border-slate-200/80 dark:border-white/5 bg-white/80 dark:bg-black/20 p-4 flex items-center justify-between shadow-sm">
                                 <div>
                                     <p class="text-xs font-bold font-mono">Tramitación Documental</p>
-                                    <p class="text-[11px] font-medium text-slate-600 dark:text-slate-300 mt-0.5">Revisión de Carpetas / Visaciones</p>
+                                    <p class="text-[11px] font-medium text-slate-600 dark:text-slate-300 mt-0.5">Confección de Carpetas / Visaciones DUS & DIN</p>
                                 </div>
                                 <span class="rounded bg-[#f59d02]/10 px-2 py-1 text-[10px] font-bold text-[#f59d02] border border-[#f59d02]/30">Línea Operativa</span>
                             </div>
 
                             <div class="rounded-2xl border border-slate-200/80 dark:border-white/5 bg-white/80 dark:bg-black/20 p-4 flex items-center justify-between shadow-sm">
                                 <div>
-                                    <p class="text-xs font-bold font-mono">Inspección Física en Zona Primaria</p>
-                                    <p class="text-[11px] font-medium text-slate-600 dark:text-slate-300 mt-0.5">Coordinación de Aforos y Sellos</p>
+                                    <p class="text-xs font-bold font-mono">Asistencia en Zona Primaria</p>
+                                    <p class="text-[11px] font-medium text-slate-600 dark:text-slate-300 mt-0.5">Acompañamiento en Aforos y Sellos</p>
                                 </div>
                                 <span class="rounded bg-[#f59d02]/10 px-2 py-1 text-[10px] font-bold text-[#f59d02] border border-[#f59d02]/30">En Terreno</span>
                             </div>
@@ -457,7 +454,7 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <!-- Operaciones y Ventajas Competitivas -->
+        <!-- Operaciones y Cobertura Nacional en Zonas Primarias -->
         <section id="operaciones" class="py-28 lg:py-40 transition-colors duration-500 relative">
             <div class="mx-auto max-w-7xl px-6 sm:px-8">
                 <div class="grid grid-cols-1 gap-14 lg:grid-cols-2 items-center">
@@ -468,7 +465,7 @@ onUnmounted(() => {
                             <div class="col-span-1 row-span-2 relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-white/10 shadow-md group h-[400px]">
                                 <img 
                                     src="/img/operaciones.jpg" 
-                                    alt="Operaciones de transporte marítimo internacional FCL y LCL en puertos de Chile" 
+                                    alt="Operaciones en Zona Primaria Marítima en puertos de Valparaíso ZEAL, San Antonio y Biobío" 
                                     class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
                                     loading="lazy"
                                     decoding="async"
@@ -476,16 +473,16 @@ onUnmounted(() => {
                                     height="400"
                                 >
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
-                                <div class="absolute bottom-4 left-5">
-                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Tráfico</span>
-                                    <h3 class="text-white font-semibold text-lg">Transporte Marítimo FCL / LCL</h3>
+                                <div class="absolute bottom-4 left-5 right-5">
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Zona Primaria Marítima</span>
+                                    <h3 class="text-white font-semibold text-lg leading-snug">Valparaíso (ZEAL), San Antonio, Coquimbo & Biobío</h3>
                                 </div>
                             </div>
 
                             <div class="col-span-1 relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-white/10 shadow-md group h-[192px]">
                                 <img 
                                     src="/img/terrestrial.jpg" 
-                                    alt="Logística y transporte terrestre de carga intermodal y pasos fronterizos en Chile" 
+                                    alt="Asistencia aduanera en pasos fronterizos terrestres: Los Andes PTLA, Chacalluta, Pino Hachado y Samoré" 
                                     class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
                                     loading="lazy"
                                     decoding="async"
@@ -493,16 +490,16 @@ onUnmounted(() => {
                                     height="192"
                                 >
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
-                                <div class="absolute bottom-4 left-5">
-                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Tráfico</span>
-                                    <h3 class="text-white font-semibold text-base">Transporte Terrestre Intermodal</h3>
+                                <div class="absolute bottom-4 left-5 right-5">
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Zona Primaria Terrestre</span>
+                                    <h3 class="text-white font-semibold text-base leading-snug">Los Andes (PTLA) & Fronteras</h3>
                                 </div>
                             </div>
 
                             <div class="col-span-1 relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-white/10 shadow-md group h-[192px]">
                                 <img 
                                     src="/img/aerial.jpg" 
-                                    alt="Transporte aéreo de carga crítica internacional en Aeropuerto Arturo Merino Benítez SCL" 
+                                    alt="Tramitación aduanera de carga aérea en Aeropuerto Internacional Arturo Merino Benítez SCL" 
                                     class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
                                     loading="lazy"
                                     decoding="async"
@@ -510,9 +507,9 @@ onUnmounted(() => {
                                     height="192"
                                 >
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
-                                <div class="absolute bottom-4 left-5">
-                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Tráfico</span>
-                                    <h3 class="text-white font-semibold text-base">Carga Aérea Internacional</h3>
+                                <div class="absolute bottom-4 left-5 right-5">
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Zona Primaria Aérea</span>
+                                    <h3 class="text-white font-semibold text-base leading-snug">Aeropuerto SCL (Santiago)</h3>
                                 </div>
                             </div>
                             
@@ -520,22 +517,23 @@ onUnmounted(() => {
                     </div>
 
                     <div class="space-y-6">
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Presencia en Terreno</span>
                         <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl leading-[1.1]">
-                            Conexión perfecta.<br/>
-                            <span class="text-slate-400">Documento y puerto.</span>
+                            Conexión integral.<br/>
+                            <span class="text-slate-400">Documento y recinto aduanero.</span>
                         </h2>
                         <p class="text-slate-600 dark:text-slate-300 font-medium text-sm sm:text-base leading-relaxed tracking-wide">
-                            Heredamos la claridad informativa de nuestra plataforma tradicional. Separamos los procesos críticos para que tanto exportadores como importadores identifiquen el estado real de sus operaciones en aduana y zona primaria.
+                            Acompañamos los despachos de importación y exportación directamente en las zonas primarias y recintos aduaneros autorizados de Chile. Nuestro personal asiste presencialmente los aforos dictaminados por el Servicio Nacional de Aduanas, coordinando inspecciones sanitarias y fitosanitarias con SAG, Sernapesca e ISP.
                         </p>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
                             <div class="border-l-4 border-[#f59d02] pl-4">
-                                <h3 class="text-sm font-bold uppercase tracking-wider">Respaldo Digital</h3>
-                                <p class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">Repositorio centralizado de carpetas de despacho escaneadas.</p>
+                                <h3 class="text-sm font-bold uppercase tracking-wider">Respaldo Digital Centralizado</h3>
+                                <p class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">Carpetas de despacho escaneadas y disponibles en línea en MIHSystem.</p>
                             </div>
                             <div class="border-l-4 border-[#f59d02] pl-4">
-                                <h3 class="text-sm font-bold uppercase tracking-wider">Mitigación de Riesgos</h3>
-                                <p class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">Evitamos multas por mala clasificación o retrasos aduaneros.</p>
+                                <h3 class="text-sm font-bold uppercase tracking-wider">Rigurosidad en Terreno</h3>
+                                <p class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">Supervisión física de sellos e inspecciones en zona primaria sin demoras.</p>
                             </div>
                         </div>
                     </div>
@@ -543,74 +541,79 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <!-- Banner Tecnológico B2B -->
-        <section class="relative h-[50vh] bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('/img/hero-bg.jpg');" aria-label="Infraestructura Tecnológica MIH">
+        <!-- Banner Tecnológico B2B (MIHSystem) -->
+        <section class="relative h-[50vh] bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('/img/hero-bg.jpg');" aria-label="Plataforma Digital Corporativa MIHSystem">
             <div class="absolute inset-0 bg-slate-100/40 dark:bg-slate-950/70"></div>
             <div class="absolute inset-0 flex items-center justify-center text-center px-4">
                 <div class="relative overflow-hidden max-w-2xl border border-white/20 bg-white/60 dark:bg-black/40 backdrop-blur-3xl p-10 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
                 <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #ffffff 1.5px; --tw-gradient-to: transparent 1.5px; background-size: 16px 16px;"></div>
                 <div class="relative z-10">
-                    <p class="text-xs font-bold uppercase tracking-widest text-[#f59d02] mb-2">Infraestructura Tecnológica</p>
-                    <h3 class="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white mb-4">Conectividad B2B y automatización de datos.</h3>
-                    <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium leading-relaxed">Transmisión EDI y API RESTful. Sincronización directa y segura con su ERP.</p>
+                    <p class="text-xs font-bold uppercase tracking-widest text-[#f59d02] mb-2">Plataforma Corporativa MIHSystem</p>
+                    <h3 class="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white mb-4">Trazabilidad y consulta de carpetas aduaneras 24/7.</h3>
+                    <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium leading-relaxed">
+                        Repositorio digital seguro para empresas y agencias de aduana aliadas. Acceso instantáneo al estatus documental bajo estricto cumplimiento de la Ley 21.719 de Protección de Datos Personales.
+                    </p>
                 </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sección de Servicios Principales -->
+        <!-- Sección de Servicios Documentales Principales -->
         <section id="servicios" class="py-36 lg:py-48 transition-colors duration-500">
             <div class="mx-auto max-w-7xl px-6 sm:px-8">
                 <div class="text-center space-y-4 max-w-2xl mx-auto">
                     <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Estructura de Servicios</span>
-                    <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl">Nuestras líneas de acción.</h2>
+                    <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl">Nuestras líneas de acción documental.</h2>
                     <p class="text-sm font-medium text-slate-600 dark:text-slate-300">
-                        Soluciones integrales diseñadas con estricto apego a las normativas aduaneras y portuarias chilenas.
+                        Soluciones técnicas diseñadas con riguroso apego a la Ordenanza de Aduanas y la legislación de comercio exterior de Chile.
                     </p>
                 </div>
 
                 <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+                    <!-- Exportación -->
                     <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
                         <div class="relative z-10">
-                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors group-hover:bg-[#f59d02] group-hover:text-white group-hover:border-[#f59d02]">
+                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors">
                                 <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-semibold tracking-tight mt-6">Operaciones de Exportación</h3>
+                            <h3 class="text-xl font-semibold tracking-tight mt-6">Tramitación de Exportación (DUS)</h3>
                             <p class="text-xs font-medium text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                                Gestión documental ágil y precisa. Tramitación de DUS (Declaración Única de Salida), visaciones y entrega final del set de documentos para asegurar su embarque.
+                                Confección, revisión y tramitación de la Declaración Única de Salida (DUS). Visaciones, legalizaciones y entrega del set documental para cumplimiento aduanero previo al embarque.
                             </p>
                         </div>
                     </div>
 
+                    <!-- Importación -->
                     <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
                         <div class="relative z-10">
-                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors group-hover:bg-[#f59d02] group-hover:text-white group-hover:border-[#f59d02]">
+                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors">
                                 <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-semibold tracking-tight mt-6">Operaciones de Importación</h3>
+                            <h3 class="text-xl font-semibold tracking-tight mt-6">Tramitación de Importación (DIN)</h3>
                             <p class="text-xs font-medium text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                                Control total en zona primaria. Coordinamos destinaciones aduaneras (DIN), aforos e inspecciones SAG/Sernapesca velando por la integridad de sus cargas.
+                                Revisión y preparación de carpetas base para Declaraciones de Ingreso (DIN). Cotejo documental previo de facturas, conocimientos de embarque y certificados para un desaduanamiento ágil.
                             </p>
                         </div>
                     </div>
 
+                    <!-- Asistencia en Zona Primaria -->
                     <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
                         <div class="relative z-10">
-                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors group-hover:bg-[#f59d02] group-hover:text-white group-hover:border-[#f59d02]">
+                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors">
                                 <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-semibold tracking-tight mt-6">Ecosistema Digital Integrado</h3>
+                            <h3 class="text-xl font-semibold tracking-tight mt-6">Asistencia en Zona Primaria</h3>
                             <p class="text-xs font-medium text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
-                                Trazabilidad 24/7. Acceso en tiempo real a carpetas digitales y reportes, operando bajo el estricto marco de la nueva Ley 21.719 de Protección de Datos.
+                                Acompañamiento en terreno durante aforos aduaneros (físicos y documentales). Verificación de sellos y coordinación de inspecciones sectoriales con SAG, Sernapesca e ISP.
                             </p>
                         </div>
                     </div>
@@ -618,14 +621,14 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <!-- Preguntas Frecuentes (FAQ / Rich Snippets) -->
+        <!-- Preguntas Frecuentes (FAQ) -->
         <section id="faq" class="py-24 lg:py-32 transition-colors duration-500 relative border-t border-slate-200/60 dark:border-white/5">
             <div class="mx-auto max-w-5xl px-6 sm:px-8">
                 <div class="text-center space-y-4 max-w-2xl mx-auto mb-16">
                     <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Resolución de Dudas B2B</span>
-                    <h2 class="text-3xl font-semibold tracking-tighter sm:text-4xl text-slate-900 dark:text-white">Preguntas Frecuentes sobre Comercio Exterior y Aduanas</h2>
+                    <h2 class="text-3xl font-semibold tracking-tighter sm:text-4xl text-slate-900 dark:text-white">Preguntas Frecuentes sobre Gestión Aduanera</h2>
                     <p class="text-sm font-medium text-slate-600 dark:text-slate-300">
-                        Información clave sobre gestión documental, cobertura portuaria y transporte de carga internacional en Chile.
+                        Información técnica sobre tramitación de carpetas, cobertura en zonas primarias y nuestra plataforma digital.
                     </p>
                 </div>
 
@@ -663,15 +666,17 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <!-- Contacto y Cobertura Portuaria -->
+        <!-- Contacto Corporativo B2B y Cobertura Nacional -->
         <section id="contacto" class="py-36 lg:py-48 transition-colors duration-500 relative">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-100/50 dark:to-white/[0.02] pointer-events-none"></div>
-            <div class="mx-auto max-w-7xl px-6 sm:px-8 grid grid-cols-1 gap-12 lg:grid-cols-2 items-start">
-                <div class="space-y-6">
+            <div class="mx-auto max-w-7xl px-6 sm:px-8 grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
+                
+                <!-- Columna Izquierda: Información de Oficina Central y Zonas Primarias -->
+                <div class="lg:col-span-5 space-y-6">
                     <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Contacto Corporativo</span>
-                    <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl">Comience a operar.</h2>
+                    <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl">Mesa de Operaciones Central.</h2>
                     <p class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed tracking-wide">
-                        Nuestras oficinas centrales están ubicadas estratégicamente en el centro financiero e histórico de Valparaíso, facilitando las gestiones directas ante las direcciones nacionales de control aduanero y portuario.
+                        Nuestras oficinas centrales están ubicadas en el centro histórico y aduanero de Valparaíso, facilitando la coordinación directa con las direcciones nacionales de control aduanero y portuario.
                     </p>
 
                     <div class="space-y-4 pt-2 text-xs font-bold text-slate-600 dark:text-slate-300 font-mono">
@@ -687,7 +692,14 @@ onUnmounted(() => {
                             </svg>
                             <span>Fono Operaciones: 032-3423242</span>
                         </div>
-                        <div class="flex items-start gap-3 pt-2">
+                        <div class="flex items-center gap-3">
+                            <svg class="h-5 w-5 text-[#f59d02] shrink-0" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span>Correo Central: contacto@mih.cl</span>
+                        </div>
+                        
+                        <div class="flex items-start gap-3 pt-3">
                             <svg class="h-5 w-5 text-[#f59d02] shrink-0 mt-0.5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                             </svg>
@@ -698,7 +710,7 @@ onUnmounted(() => {
                                     <span class="inline-flex items-center px-2 py-1 rounded bg-[#f59d02]/10 border border-[#f59d02]/20 text-[10px] font-semibold text-[#f59d02] uppercase tracking-wider">Valparaíso (Matriz & ZEAL)</span>
                                     <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Coquimbo</span>
                                     <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">San Antonio</span>
-                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Los Andes</span>
+                                    <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Los Andes (PTLA)</span>
                                     <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Pino Hachado</span>
                                     <span class="inline-flex items-center px-2 py-1 rounded bg-sky-500/10 border border-sky-500/20 text-[10px] font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider">Aeropuerto SCL</span>
                                     <span class="inline-flex items-center px-2 py-1 rounded bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[10px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Cardenal Samoré</span>
@@ -712,40 +724,137 @@ onUnmounted(() => {
                     </div>
                 </div>
 
-                <div class="rounded-[2rem] border border-slate-200/50 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-2xl p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-colors duration-500 flex flex-col justify-center gap-6 text-center sm:text-left h-full">
-                    <p class="text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Comuníquese directamente con Operaciones:</p>
-                    
-                    <a 
-                        href="mailto:contacto@mih.cl" 
-                        class="flex items-center justify-center sm:justify-start gap-5 rounded-2xl bg-white dark:bg-white/5 px-6 py-5 transition-all hover:scale-[1.02] border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-md"
-                        aria-label="Escribir correo a contacto@mih.cl"
-                    >
-                        <div class="h-10 w-10 rounded-full bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shrink-0">
-                            <svg class="h-5 w-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
+                <!-- Columna Derecha: Formulario de Requerimiento Aduanero B2B -->
+                <div class="lg:col-span-7">
+                    <div class="rounded-[2rem] border border-slate-200/50 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-colors duration-500">
+                        <div class="border-b border-slate-200 dark:border-white/10 pb-4 mb-6">
+                            <span class="text-[11px] font-bold uppercase tracking-widest text-[#f59d02]">Formulario de Solicitud B2B</span>
+                            <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-slate-900 dark:text-white mt-1">Requerimiento de Gestión Documental</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Dirigido a Agencias de Aduana y Empresas Importadoras / Exportadoras.</p>
                         </div>
-                        <div>
-                            <span class="block text-[10px] font-bold uppercase tracking-widest text-slate-500">Correo Corporativo</span>
-                            <span class="block text-sm font-bold text-slate-900 dark:text-white mt-0.5">contacto@mih.cl</span>
-                        </div>
-                    </a>
 
-                    <a 
-                        href="tel:+56323423242" 
-                        class="flex items-center justify-center sm:justify-start gap-5 rounded-2xl bg-white dark:bg-white/5 px-6 py-5 transition-all hover:scale-[1.02] border border-slate-100 dark:border-white/5 shadow-sm hover:shadow-md"
-                        aria-label="Llamar a Mesa de Operaciones Central al +56 32 342 3242"
-                    >
-                        <div class="h-10 w-10 rounded-full bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shrink-0">
-                            <svg class="h-5 w-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <span class="block text-[10px] font-bold uppercase tracking-widest text-slate-500">Fono Operaciones Central</span>
-                            <span class="block text-sm font-bold text-slate-900 dark:text-white mt-0.5">+56 32 342 3242</span>
-                        </div>
-                    </a>
+                        <form @submit.prevent="submitContactForm" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="companyName">Razón Social / Agencia *</label>
+                                    <input 
+                                        id="companyName"
+                                        v-model="form.companyName" 
+                                        type="text" 
+                                        required 
+                                        placeholder="Ej: Comercial Andina SpA"
+                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
+                                    />
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="rut">RUT Empresa *</label>
+                                    <input 
+                                        id="rut"
+                                        v-model="form.rut" 
+                                        type="text" 
+                                        required 
+                                        placeholder="76.xxx.xxx-x"
+                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors font-mono"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="serviceType">Tipo de Requerimiento *</label>
+                                    <select 
+                                        id="serviceType"
+                                        v-model="form.serviceType"
+                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
+                                    >
+                                        <option value="Tramitación Exportación (DUS)">Tramitación Exportación (DUS)</option>
+                                        <option value="Tramitación Importación (DIN)">Tramitación Importación (DIN)</option>
+                                        <option value="Asistencia en Aforo / Zona Primaria">Asistencia en Aforo / Zona Primaria</option>
+                                        <option value="Consulta / Integración MIHSystem">Consulta / Integración MIHSystem</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="customsZone">Zona Primaria / Aduana *</label>
+                                    <select 
+                                        id="customsZone"
+                                        v-model="form.customsZone"
+                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
+                                    >
+                                        <option value="Valparaíso (Matriz & ZEAL)">Valparaíso (Matriz & ZEAL)</option>
+                                        <option value="San Antonio">San Antonio</option>
+                                        <option value="Aeropuerto SCL (Santiago)">Aeropuerto SCL (Santiago)</option>
+                                        <option value="Los Andes (PTLA)">Los Andes (PTLA)</option>
+                                        <option value="Biobío (Talcahuano / San Vicente / Coronel / Lirquén)">Biobío (Talcahuano / San Vicente)</option>
+                                        <option value="Arica (Chacalluta)">Arica (Chacalluta)</option>
+                                        <option value="Coquimbo">Coquimbo</option>
+                                        <option value="Pasos Fronterizos Terrestres (Pino Hachado / Samoré)">Pasos Terrestres (Pino Hachado / Samoré)</option>
+                                        <option value="Otra Zona Primaria">Otra Zona Primaria</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="contactName">Contacto *</label>
+                                    <input 
+                                        id="contactName"
+                                        v-model="form.contactName" 
+                                        type="text" 
+                                        required 
+                                        placeholder="Nombre y Apellido"
+                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
+                                    />
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="email">Email Corporativo *</label>
+                                    <input 
+                                        id="email"
+                                        v-model="form.email" 
+                                        type="email" 
+                                        required 
+                                        placeholder="ejecutivo@empresa.cl"
+                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors"
+                                    />
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="phone">Teléfono / Anexo *</label>
+                                    <input 
+                                        id="phone"
+                                        v-model="form.phone" 
+                                        type="tel" 
+                                        required 
+                                        placeholder="+56 9 xxxx xxxx"
+                                        class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 px-3.5 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors font-mono"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5" for="details">Detalle del Requerimiento / Despacho</label>
+                                <textarea 
+                                    id="details"
+                                    v-model="form.details"
+                                    rows="3" 
+                                    placeholder="Indique información relevante del despacho: N° de carpetas estimadas, mercancía, fechas aproximadas o requerimiento especial en zona primaria..."
+                                    class="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-black/30 p-3 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-[#f59d02] focus:outline-none focus:ring-1 focus:ring-[#f59d02] transition-colors resize-none"
+                                ></textarea>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-2">
+                                <span class="text-[11px] text-slate-500 dark:text-slate-400">Atención directa: Lun a Vie 08:30 a 18:30 hrs.</span>
+                                <button 
+                                    type="submit" 
+                                    class="rounded-xl bg-[#f59d02] px-6 py-3 text-xs font-bold text-slate-950 shadow-[0_4px_14px_rgba(245,157,2,0.3)] transition-all hover:scale-[1.02] hover:bg-[#e08f02] cursor-pointer"
+                                >
+                                    Enviar a Mesa de Operaciones
+                                </button>
+                            </div>
+
+                            <div v-if="formSent" class="mt-3 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
+                                Requerimiento preparado. Su cliente de correo se abrirá para confirmar el envío a <strong>contacto@mih.cl</strong>.
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
             </div>
@@ -838,17 +947,17 @@ onUnmounted(() => {
                 <!-- Contenido con scroll dinámico -->
                 <div class="overflow-y-auto p-6 text-sm text-slate-600 dark:text-slate-300 space-y-4">
                     <template v-if="activeModal === 'privacy'">
-                        <p><strong>1. Responsable del Tratamiento:</strong> Agencia de Embarques MIH SpA, con domicilio en Almirante Señoret 70, Valparaíso.</p>
-                        <p><strong>2. Finalidad:</strong> La información recopilada mediante nuestros canales corporativos es utilizada exclusivamente para coordinar y ejecutar servicios aduaneros, portuarios y documentales solicitados por nuestros clientes.</p>
-                        <p><strong>3. Base Legal:</strong> El tratamiento se rige por la Ley N° 19.628 sobre Protección de la Vida Privada (actualizada por la Ley 21.719). Sus datos no serán cedidos a terceros, salvo requerimientos legales o aduaneros dictaminados por el Estado de Chile.</p>
+                        <p><strong>1. Responsable del Tratamiento:</strong> Agencia de Embarques MIH SpA, con domicilio en Almirante Señoret 70, Oficina 51, Valparaíso.</p>
+                        <p><strong>2. Finalidad:</strong> La información recopilada mediante nuestros canales corporativos es utilizada exclusivamente para coordinar y ejecutar la tramitación documental aduanera y los servicios en zona primaria solicitados por nuestros clientes.</p>
+                        <p><strong>3. Base Legal:</strong> El tratamiento se rige por la Ley N° 19.628 sobre Protección de la Vida Privada (actualizada por la Ley 21.719). Sus datos no serán cedidos a terceros, salvo requerimientos legales dictaminados por el Servicio Nacional de Aduanas u otros organismos competentes del Estado de Chile.</p>
                         <p><strong>4. Derechos ARCO:</strong> Usted puede ejercer sus derechos de Acceso, Rectificación, Cancelación u Oposición enviando un correo a <a href="mailto:contacto@mih.cl" class="text-[#f59d02] font-semibold hover:underline" aria-label="Enviar correo para ejercicio de derechos ARCO">contacto@mih.cl</a>.</p>
                         <p><strong>5. Conservación:</strong> Los datos se almacenan en servidores seguros bajo altos estándares de la industria, durante el tiempo necesario para la prestación del servicio de gestión documental y operativo.</p>
                     </template>
                     <template v-else>
-                        <p><strong>1. Alcance de los Servicios:</strong> Agencia de Embarques MIH se especializa en la gestión documental y operativa para la tramitación de despachos de exportación e importación ante el Servicio Nacional de Aduanas.</p>
-                        <p><strong>2. Responsabilidad Operativa:</strong> MIH asume la coordinación diligente de aforos y tramitaciones, pero no se hace responsable por retrasos, multas o bloqueos dictaminados de forma unilateral por SAG, Sernapesca, Aduana u otras autoridades fiscales/marítimas.</p>
-                        <p><strong>3. Confidencialidad:</strong> Toda información comercial de sus despachos será tratada con estricta reserva por nuestro personal de oficina y terreno.</p>
-                        <p><strong>4. Ajustes Tarifarios:</strong> Cualquier tarifa proyectada puede sufrir variaciones si las condiciones de la carga (pesos, dimensiones, sobreestadías) difieren de lo declarado inicialmente en la matriz documental.</p>
+                        <p><strong>1. Alcance de los Servicios:</strong> Agencia de Embarques MIH SpA se especializa en la gestión documental y asistencia operativa en zona primaria para la tramitación de despachos de exportación (DUS) e importación (DIN) ante el Servicio Nacional de Aduanas.</p>
+                        <p><strong>2. Responsabilidad Operativa:</strong> MIH SpA asume la gestión diligente de las carpetas aduaneras y el acompañamiento en aforos, pero no se responsabiliza por retrasos, aforos extraordinarios o resoluciones dictaminadas de forma unilateral y privativa por Aduana, SAG, Sernapesca u otras autoridades competentes.</p>
+                        <p><strong>3. Confidencialidad Corporativa:</strong> Toda información comercial y documental relativa a sus despachos será tratada con estricta reserva y confidencialidad.</p>
+                        <p><strong>4. Ajustes Tarifarios:</strong> Cualquier cotización u honorario por servicios documentales está sujeto a las condiciones declaradas en los instructivos y sets documentales proporcionados.</p>
                         <p><strong>5. Jurisdicción:</strong> Cualquier controversia derivada de la prestación de los servicios será sometida a la jurisdicción de los Tribunales Ordinarios de Valparaíso, Chile.</p>
                     </template>
                 </div>
