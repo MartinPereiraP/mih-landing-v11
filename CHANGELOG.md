@@ -20,6 +20,10 @@
 - Componente `Landing.vue` y ruta privada `/preview` para revisar y pulir la landing page oficial.
 - Prueba automatizada para la ruta `/preview` en `tests/Feature/SeoRoutesTest.php`.
 
+- Incorporación de `banner.jpg` (1200x300 px) en `public/resources/images/` para firmas corporativas en Outlook.
+- Definición de endpoint público en `routes/web.php` para servir recursos gráficos bajo `/resources/images/{filename}` con cabeceras CORS (`Access-Control-Allow-Origin: *`) y control de caché prolongada.
+- Suite de pruebas de integración en `tests/Feature/SignatureAssetsTest.php` validando disponibilidad de `logo-mih.png`, `banner.jpg`, `logo-mih.svg` y código 404 en archivos inexistentes.
+
 ### Modificado
 - Activación pública de la Landing Page oficial en la ruta raíz (`/`), retirando la pantalla de mantenimiento para visualización directa en producción.
 - Sincronización de metadatos SEO y Schema.org en `resources/views/app.blade.php` y suite de pruebas `tests/Feature/SeoRoutesTest.php`.
@@ -40,5 +44,7 @@
 - Configuración de políticas de CORS globales (`Access-Control-Allow-Origin "*"`) en la carpeta pública para consumo remoto de imágenes.
 - Corrección en workflow de despliegue (`.github/workflows/deploy.yml`) para preservar archivos descubiertos `packages.php` y `services.php` en `bootstrap/cache/`.
 - Reordenamiento de directivas en `.htaccess` para procesar el rewrite de assets antes de la regla de bloqueo de carpetas internas.
+- Exclusión explícita de `/resources/images/` en la regla de bloqueo de carpetas internas de `.htaccess` para garantizar entrega de firmas de correo.
+- Eliminación de la redirección 302 hacia el home provocada por el enrutador fallback de Laravel al consumir imágenes de firmas de Outlook.
 
 
