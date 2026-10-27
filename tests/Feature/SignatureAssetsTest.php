@@ -35,6 +35,16 @@ class SignatureAssetsTest extends TestCase
         $response->assertHeader('Access-Control-Allow-Origin', '*');
     }
 
+    public function test_green_png_is_publicly_accessible_with_cors(): void
+    {
+        $response = $this->get('/resources/images/green.png');
+
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'image/png');
+        $response->assertHeader('Access-Control-Allow-Origin', '*');
+        $response->assertHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    }
+
     public function test_non_existent_asset_returns_404(): void
     {
         $response = $this->get('/resources/images/non-existent.png');

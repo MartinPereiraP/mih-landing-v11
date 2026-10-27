@@ -62,8 +62,6 @@ jobs:
             .phpunit.result.cache
             .env
             .env.*
-            .htaccess
-            public/.htaccess
             storage/**
             *.zip
             *.md
