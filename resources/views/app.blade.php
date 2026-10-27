@@ -42,7 +42,19 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
         <!-- Preload de Imagen Hero (LCP Optimization) -->
-        <link rel="preload" as="image" href="/img/hero-bg.jpg" fetchpriority="high">
+        <link rel="preload" as="image" type="image/webp" href="/img/hero-bg.webp" fetchpriority="high">
+
+        <!-- Tema: preferencia guardada o la del sistema, aplicada antes de pintar -->
+        <script>
+            (function () {
+                try {
+                    var theme = localStorage.getItem('theme');
+                    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                        document.documentElement.classList.add('dark');
+                    }
+                } catch (e) {}
+            })();
+        </script>
 
         <!-- Datos Estructurados Schema.org JSON-LD (@graph) -->
         <script type="application/ld+json">
