@@ -20,9 +20,10 @@
 - Componente `Landing.vue` y ruta privada `/preview` para revisar y pulir la landing page oficial.
 - Prueba automatizada para la ruta `/preview` en `tests/Feature/SeoRoutesTest.php`.
 
-- Incorporación de `banner.jpg` (1200x300 px) en `public/resources/images/` para firmas corporativas en Outlook.
+- Incorporación de `banner.jpg` (1200x300 px) y `green.png` en `public/resources/images/` para firmas corporativas en Outlook.
 - Definición de endpoint público en `routes/web.php` para servir recursos gráficos bajo `/resources/images/{filename}` con cabeceras CORS (`Access-Control-Allow-Origin: *`) y control de caché prolongada.
-- Suite de pruebas de integración en `tests/Feature/SignatureAssetsTest.php` validando disponibilidad de `logo-mih.png`, `banner.jpg`, `logo-mih.svg` y código 404 en archivos inexistentes.
+- Suite de pruebas de integración en `tests/Feature/SignatureAssetsTest.php` validando disponibilidad de `logo-mih.png`, `banner.jpg`, `logo-mih.svg`, `green.png` y código 404 en archivos inexistentes.
+- Sincronización automática de directivas `.htaccess` y `public/.htaccess` hacia cPanel vía FTPS en `.github/workflows/deploy.yml`.
 
 ### Modificado
 - Activación pública de la Landing Page oficial en la ruta raíz (`/`), retirando la pantalla de mantenimiento para visualización directa en producción.
