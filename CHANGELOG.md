@@ -24,6 +24,9 @@
 - Definición de endpoint público en `routes/web.php` para servir recursos gráficos bajo `/resources/images/{filename}` con cabeceras CORS (`Access-Control-Allow-Origin: *`) y control de caché prolongada.
 - Suite de pruebas de integración en `tests/Feature/SignatureAssetsTest.php` validando disponibilidad de `logo-mih.png`, `banner.jpg`, `logo-mih.svg`, `green.png` y código 404 en archivos inexistentes.
 - Sincronización automática de directivas `.htaccess` y `public/.htaccess` hacia cPanel vía FTPS en `.github/workflows/deploy.yml`.
+- Paleta corporativa `mih` (`amber` #fbbf24, `ink` #92400e, `night` #0b1a2e) en `tailwind.config.js`.
+- Versiones WebP optimizadas de las fotografías en `public/img/` (`hero-bg`, `operaciones`, `operaciones-1376`, `terrestrial`, `aerial`), servidas con `<picture>` y respaldo JPG.
+- Recorrido de la Red Operativa Nacional de norte a sur en `Landing.vue`, con ícono por tipo de zona primaria (marítima, terrestre y aérea) y la matriz de Valparaíso destacada.
 
 ### Modificado
 - Activación pública de la Landing Page oficial en la ruta raíz (`/`), retirando la pantalla de mantenimiento para visualización directa en producción.
@@ -31,6 +34,8 @@
 - Refactorización integral de `resources/js/pages/Landing.vue` adaptada a la identidad y servicios reales de Agencia de Embarques MIH SpA.
 - Actualización de metadatos Schema.org (`LocalBusiness`, `Service`, `OfferCatalog`, `FAQPage`) reflejando tramitación de DUS/DIN, asistencia en aforos y soporte digital en MIHSystem.
 - Compilación de assets para producción con Vite (`public/build/`).
+- Rediseño visual de `Landing.vue` sin cambios de contenido: hero con fotografía portuaria y velo corporativo, fotografías en las tarjetas de servicios, franja MIHSystem en ámbar corporativo y acentos unificados en la paleta `mih`.
+- Precarga de la imagen principal en `resources/views/app.blade.php` apuntando a `hero-bg.webp` (989 KB → 138 KB).
 
 ### Eliminado
 - Supresión total del formulario web de contacto en `Landing.vue` para cumplimiento riguroso de la Ley 21.719 (sin captura ni almacenamiento de datos web), canalizando los requerimientos exclusivamente por medios directos (teléfono, email corporativo y plataforma MIHSystem).
@@ -47,5 +52,8 @@
 - Reordenamiento de directivas en `.htaccess` para procesar el rewrite de assets antes de la regla de bloqueo de carpetas internas.
 - Exclusión explícita de `/resources/images/` en la regla de bloqueo de carpetas internas de `.htaccess` para garantizar entrega de firmas de correo.
 - Eliminación de la redirección 302 hacia el home provocada por el enrutador fallback de Laravel al consumir imágenes de firmas de Outlook.
+- Botón de modo claro/oscuro sin efecto: `darkMode: 'class'` en Tailwind y script previo al pintado en `app.blade.php` que aplica la preferencia guardada o la del sistema.
+- Contraste insuficiente de etiquetas naranjas (2.07:1 → 6.8:1) y del botón principal (2.16:1 → 10.7:1) según WCAG.
+- Desborde de la franja MIHSystem en móvil y fondo fijo (`bg-fixed`) no soportado en iOS Safari.
 
 
