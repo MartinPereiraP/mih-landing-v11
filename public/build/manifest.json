@@ -1,11 +1,18 @@
 {
+  "_createLucideIcon-DJL0QJmD.js": {
+    "file": "assets/createLucideIcon-DJL0QJmD.js",
+    "name": "createLucideIcon",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-DaqlXxnX.css",
+    "file": "assets/app-Nvbm1gux.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BvCbHdtQ.js",
+    "file": "assets/app-EM3HG85T.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -14,32 +21,34 @@
       "resources/js/pages/Maintenance.vue"
     ],
     "css": [
-      "assets/app-DaqlXxnX.css"
+      "assets/app-Nvbm1gux.css"
     ]
   },
   "resources/js/pages/Landing.vue": {
-    "file": "assets/Landing-CfNQtt3L.js",
+    "file": "assets/Landing-Ce7kNM-i.js",
     "name": "Landing",
     "src": "resources/js/pages/Landing.vue",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.js"
+      "resources/js/app.js",
+      "_createLucideIcon-DJL0QJmD.js"
     ],
     "css": [
       "assets/Landing-CLY4iuXT.css",
-      "assets/app-DaqlXxnX.css"
+      "assets/app-Nvbm1gux.css"
     ]
   },
   "resources/js/pages/Maintenance.vue": {
-    "file": "assets/Maintenance-giNGrsVz.js",
+    "file": "assets/Maintenance-DdRytYYF.js",
     "name": "Maintenance",
     "src": "resources/js/pages/Maintenance.vue",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.js"
+      "resources/js/app.js",
+      "_createLucideIcon-DJL0QJmD.js"
     ],
     "css": [
-      "assets/app-DaqlXxnX.css"
+      "assets/app-Nvbm1gux.css"
     ]
   }
 }

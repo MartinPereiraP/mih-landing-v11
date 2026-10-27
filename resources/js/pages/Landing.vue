@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted } from 'vue';
+import { Anchor, Plane, Truck } from '@lucide/vue';
 
 const isDark = ref(false);
 const activeModal = ref<'none' | 'privacy' | 'terms'>('none');
@@ -32,6 +33,28 @@ const faqs = [
         q: '¿Cómo acceden las agencias y empresas a sus carpetas de despacho digitalizadas?',
         a: 'A través de nuestra plataforma corporativa MIHSystem (https://mihsystem.cl), clientes y agencias de aduana aliadas pueden consultar, descargar y auditar en tiempo real sus carpetas de despacho y estados aduaneros las 24 horas del día, bajo el marco de la Ley 21.719 de Protección de Datos Personales.'
     }
+];
+
+// Red Operativa Nacional ordenada de norte a sur
+const tiposZona = {
+    maritima: { label: 'Marítima', icon: Anchor },
+    terrestre: { label: 'Terrestre', icon: Truck },
+    aerea: { label: 'Aérea', icon: Plane },
+};
+
+const zonas: { nombre: string; tipo: keyof typeof tiposZona; matriz?: boolean }[] = [
+    { nombre: 'Arica (Chacalluta)', tipo: 'terrestre' },
+    { nombre: 'Coquimbo', tipo: 'maritima' },
+    { nombre: 'Los Andes (PTLA)', tipo: 'terrestre' },
+    { nombre: 'Valparaíso (Matriz & ZEAL)', tipo: 'maritima', matriz: true },
+    { nombre: 'Aeropuerto SCL (Santiago)', tipo: 'aerea' },
+    { nombre: 'San Antonio', tipo: 'maritima' },
+    { nombre: 'Lirquén', tipo: 'maritima' },
+    { nombre: 'Talcahuano', tipo: 'maritima' },
+    { nombre: 'San Vicente', tipo: 'maritima' },
+    { nombre: 'Coronel', tipo: 'maritima' },
+    { nombre: 'Pino Hachado', tipo: 'terrestre' },
+    { nombre: 'Cardenal Samoré', tipo: 'terrestre' },
 ];
 
 const acceptCookies = () => {
@@ -262,12 +285,12 @@ onUnmounted(() => {
         </component>
     </Head>
 
-    <div class="min-h-screen bg-[#fafafa] text-slate-900 dark:bg-[#050505] dark:text-slate-100 font-sans antialiased selection:bg-[#f59d02] selection:text-white transition-colors duration-500 relative overflow-hidden">
+    <div class="min-h-screen bg-[#fafafa] text-slate-900 dark:bg-[#050505] dark:text-slate-100 font-sans antialiased selection:bg-mih-amber selection:text-slate-950 transition-colors duration-500 relative overflow-hidden">
         
         <!-- Apple-style Ambient Glow -->
         <div class="pointer-events-none absolute inset-0 overflow-hidden flex justify-center z-0">
-            <div class="w-[800px] h-[400px] bg-white dark:bg-[#f59d02] opacity-100 dark:opacity-[0.03] blur-[100px] rounded-full absolute -top-32 transition-all duration-700"></div>
-            <div class="w-[600px] h-[600px] bg-slate-100 dark:bg-[#f59d02] opacity-50 dark:opacity-[0.02] blur-[120px] rounded-full absolute -left-64 top-1/3 transition-all duration-700"></div>
+            <div class="w-[800px] h-[400px] bg-white dark:bg-mih-amber opacity-100 dark:opacity-[0.03] blur-[100px] rounded-full absolute -top-32 transition-all duration-700"></div>
+            <div class="w-[600px] h-[600px] bg-slate-100 dark:bg-mih-amber opacity-50 dark:opacity-[0.02] blur-[120px] rounded-full absolute -left-64 top-1/3 transition-all duration-700"></div>
         </div>
 
         <header class="sticky top-0 z-50 border-b border-slate-200/60 dark:border-white/[0.04] bg-white/60 dark:bg-[#0a0a0a]/60 backdrop-blur-2xl transition-all duration-500">
@@ -329,36 +352,52 @@ onUnmounted(() => {
 
         <main class="relative z-10">
         <!-- Hero Section -->
-        <section class="relative pt-16 pb-24 lg:pt-28 lg:pb-36 overflow-hidden transition-all duration-500">
+        <section class="relative pt-16 pb-24 lg:pt-28 lg:pb-36 overflow-hidden bg-mih-night transition-all duration-500">
+            <!-- Fotografía de puerto con velo corporativo -->
+            <picture class="absolute inset-0" aria-hidden="true">
+                <source type="image/webp" srcset="/img/hero-bg.webp">
+                <img
+                    src="/img/hero-bg.jpg"
+                    alt=""
+                    class="h-full w-full object-cover"
+                    fetchpriority="high"
+                    loading="eager"
+                    decoding="async"
+                    width="1376"
+                    height="768"
+                >
+            </picture>
+            <div class="absolute inset-0 bg-mih-night/70 lg:bg-transparent lg:bg-gradient-to-r lg:from-mih-night/95 lg:via-mih-night/75 lg:to-mih-night/25" aria-hidden="true"></div>
+
             <div class="mx-auto max-w-7xl px-6 sm:px-8 grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center relative z-10">
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 rounded-full border border-dashed border-[#f59d02]/40 bg-[#f59d02]/5 backdrop-blur-md px-3 py-1 text-[11px] font-mono font-semibold tracking-wide text-[#f59d02] shadow-sm">
-                        <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <div class="inline-flex items-center gap-2 rounded-full border border-dashed border-mih-amber/50 bg-mih-amber/10 backdrop-blur-md px-3 py-1 text-[11px] font-mono font-semibold tracking-wide text-mih-amber shadow-sm">
+                        <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
                         Soporte Operativo Activo · Red Nacional de Zonas Primarias
                     </div>
-                    <p class="text-xs font-bold uppercase tracking-widest text-[#f59d02] mb-3">Equipo profesional con más de 20 años de trayectoria en tramitación aduanera y gestión de comercio exterior.</p>
-                    
+                    <p class="text-xs font-bold uppercase tracking-widest text-mih-amber mb-3">Equipo profesional con más de 20 años de trayectoria en tramitación aduanera y gestión de comercio exterior.</p>
+
                     <!-- Exactamente un H1 enfocado en Comercio Exterior y Agencia de Embarques en Chile -->
-                    <h1 class="text-5xl font-semibold tracking-tighter sm:text-6xl xl:text-[76px] leading-[1.05] text-slate-900 dark:text-white">
+                    <h1 class="text-5xl font-semibold tracking-tighter sm:text-6xl xl:text-[76px] leading-[1.05] text-white">
                         Precisión documental en Comercio Exterior.<br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#f59d02] to-amber-400">Agencia de Embarques en Chile.</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-mih-amber to-[#f59d02]">Agencia de Embarques en Chile.</span>
                     </h1>
 
-                    <p class="text-lg sm:text-xl text-slate-500 dark:text-slate-400 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed tracking-tight">
+                    <p class="text-lg sm:text-xl text-slate-200 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed tracking-tight">
                         Confeccionamos, visamos y tramitamos carpetas aduaneras de exportación (DUS) e importación (DIN), brindando asistencia presencial en aforos en zonas primarias y respaldo digital 24/7 en MIHSystem.
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
                         <a 
                             href="#contacto" 
-                            class="rounded-full bg-[#f59d02] px-8 py-3.5 text-center text-[15px] font-medium text-white shadow-[0_8px_20px_rgba(245,157,2,0.3)] transition-all hover:scale-[1.02] hover:bg-[#e08f02]"
+                            class="rounded-full bg-mih-amber px-8 py-3.5 text-center text-[15px] font-semibold text-slate-950 shadow-[0_8px_20px_rgba(251,191,36,0.3)] transition-all hover:scale-[1.02] hover:bg-amber-300"
                             aria-label="Contactar a la mesa de operaciones de MIH"
                         >
                             Contactar Operaciones
                         </a>
                         <a 
                             href="#servicios" 
-                            class="rounded-full bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 px-8 py-3.5 text-center text-[15px] font-medium text-slate-900 dark:text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-slate-50 dark:hover:bg-white/10"
+                            class="rounded-full bg-white/10 border border-white/25 backdrop-blur-md px-8 py-3.5 text-center text-[15px] font-medium text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-white/20"
                             aria-label="Descubrir los servicios documentales aduaneros de MIH"
                         >
                             Servicios Documentales
@@ -366,18 +405,18 @@ onUnmounted(() => {
                     </div>
                     
                     <div class="flex items-center gap-2 mt-6 justify-center lg:justify-start">
-                        <svg class="h-4 w-4 text-emerald-500 shrink-0" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <svg class="h-4 w-4 text-emerald-400 shrink-0" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
-                        <span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">Operando bajo estricto cumplimiento de la nueva <strong class="text-slate-700 dark:text-slate-200 font-semibold">Ley 21.719 de Protección de Datos</strong></span>
+                        <span class="text-[11px] font-medium text-slate-300">Operando bajo estricto cumplimiento de la nueva <strong class="text-white font-semibold">Ley 21.719 de Protección de Datos</strong></span>
                     </div>
                 </div>
 
                 <div class="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none">
-                    <div class="relative rounded-3xl border border-slate-200/50 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-colors duration-500">
+                    <div class="relative rounded-3xl border border-white/40 dark:border-white/10 bg-white/85 dark:bg-mih-night/75 backdrop-blur-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-colors duration-500">
                         <div class="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
                             <div class="flex items-center gap-2">
-                                <div class="h-3 w-3 rounded-full bg-[#f59d02]"></div>
+                                <div class="h-3 w-3 rounded-full bg-mih-amber"></div>
                                 <div class="h-3 w-3 rounded-full bg-slate-400"></div>
                                 <div class="h-3 w-3 rounded-full bg-slate-500"></div>
                             </div>
@@ -385,14 +424,14 @@ onUnmounted(() => {
                         </div>
 
                         <div class="space-y-4">
-                            <p class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Monitoreo de Servicios</p>
+                            <p class="text-xs font-bold uppercase tracking-widest text-mih-ink dark:text-mih-amber">Monitoreo de Servicios</p>
 
                             <div class="rounded-2xl border border-slate-200/80 dark:border-white/5 bg-white/80 dark:bg-black/20 p-4 flex items-center justify-between shadow-sm">
                                 <div>
                                     <p class="text-xs font-bold font-mono">Tramitación Documental</p>
                                     <p class="text-[11px] font-medium text-slate-600 dark:text-slate-300 mt-0.5">Confección de Carpetas / Visaciones DUS & DIN</p>
                                 </div>
-                                <span class="rounded bg-[#f59d02]/10 px-2 py-1 text-[10px] font-bold text-[#f59d02] border border-[#f59d02]/30">Línea Operativa</span>
+                                <span class="rounded bg-mih-amber/20 px-2 py-1 text-[10px] font-bold text-mih-ink dark:text-mih-amber border border-mih-amber/40">Línea Operativa</span>
                             </div>
 
                             <div class="rounded-2xl border border-slate-200/80 dark:border-white/5 bg-white/80 dark:bg-black/20 p-4 flex items-center justify-between shadow-sm">
@@ -400,7 +439,7 @@ onUnmounted(() => {
                                     <p class="text-xs font-bold font-mono">Asistencia en Zona Primaria</p>
                                     <p class="text-[11px] font-medium text-slate-600 dark:text-slate-300 mt-0.5">Acompañamiento en Aforos y Sellos</p>
                                 </div>
-                                <span class="rounded bg-[#f59d02]/10 px-2 py-1 text-[10px] font-bold text-[#f59d02] border border-[#f59d02]/30">En Terreno</span>
+                                <span class="rounded bg-mih-amber/20 px-2 py-1 text-[10px] font-bold text-mih-ink dark:text-mih-amber border border-mih-amber/40">En Terreno</span>
                             </div>
 
                             <div class="pt-2">
@@ -408,10 +447,10 @@ onUnmounted(() => {
                                     href="https://mihsystem.cl" 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    class="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-[#f59d02]/30 dark:border-[#f59d02]/20 bg-[#f59d02]/5 dark:bg-[#f59d02]/5 py-3.5 text-[12px] font-mono font-bold text-[#f59d02] hover:text-[#f59d02] hover:bg-[#f59d02]/10 hover:border-[#f59d02]/60 transition-all shadow-sm"
+                                    class="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-mih-amber/60 dark:border-mih-amber/40 bg-mih-amber/10 py-3.5 text-[12px] font-mono font-bold text-mih-ink dark:text-mih-amber hover:bg-mih-amber/25 hover:border-mih-amber transition-all shadow-sm"
                                     aria-label="Ingresar al sistema corporativo MIHSystem (se abre en nueva pestaña)"
                                 >
-                                    <svg class="h-4 w-4 text-[#f59d02]" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                    <svg class="h-4 w-4" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                     </svg>
                                     Ingresar al Sistema Corporativo
@@ -428,56 +467,65 @@ onUnmounted(() => {
             <div class="mx-auto max-w-7xl px-6 sm:px-8">
                 <div class="grid grid-cols-1 gap-14 lg:grid-cols-2 items-center">
                     <div class="relative">
-                        <div class="absolute -inset-2 rounded-xl bg-gradient-to-r from-[#f59d02] to-amber-600 opacity-10 blur-xl"></div>
+                        <div class="absolute -inset-2 rounded-xl bg-gradient-to-r from-mih-amber to-amber-600 opacity-10 blur-xl"></div>
                         <div class="relative grid grid-cols-2 gap-4 h-full">
                             
                             <div class="col-span-1 row-span-2 relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-white/10 shadow-md group h-[400px]">
-                                <img 
-                                    src="/img/operaciones.jpg" 
-                                    alt="Operaciones en Zona Primaria Marítima en puertos de Valparaíso ZEAL, San Antonio y Biobío" 
-                                    class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
-                                    loading="lazy"
-                                    decoding="async"
-                                    width="600"
-                                    height="400"
-                                >
+                                <picture class="block h-full">
+                                    <source type="image/webp" srcset="/img/operaciones-1376.webp">
+                                    <img
+                                        src="/img/operaciones.jpg"
+                                        alt="Operaciones en Zona Primaria Marítima en puertos de Valparaíso ZEAL, San Antonio y Biobío"
+                                        class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+                                        loading="lazy"
+                                        decoding="async"
+                                        width="600"
+                                        height="400"
+                                    >
+                                </picture>
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
                                 <div class="absolute bottom-4 left-5 right-5">
-                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Zona Primaria Marítima</span>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-mih-amber">Zona Primaria Marítima</span>
                                     <h3 class="text-white font-semibold text-lg leading-snug">Valparaíso (ZEAL), San Antonio, Coquimbo & Biobío</h3>
                                 </div>
                             </div>
 
                             <div class="col-span-1 relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-white/10 shadow-md group h-[192px]">
-                                <img 
-                                    src="/img/terrestrial.jpg" 
-                                    alt="Asistencia aduanera en pasos fronterizos terrestres: Los Andes PTLA, Chacalluta, Pino Hachado y Samoré" 
-                                    class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
-                                    loading="lazy"
-                                    decoding="async"
-                                    width="600"
-                                    height="192"
-                                >
+                                <picture class="block h-full">
+                                    <source type="image/webp" srcset="/img/terrestrial.webp">
+                                    <img
+                                        src="/img/terrestrial.jpg"
+                                        alt="Asistencia aduanera en pasos fronterizos terrestres: Los Andes PTLA, Chacalluta, Pino Hachado y Samoré"
+                                        class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+                                        loading="lazy"
+                                        decoding="async"
+                                        width="600"
+                                        height="192"
+                                    >
+                                </picture>
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
                                 <div class="absolute bottom-4 left-5 right-5">
-                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Zona Primaria Terrestre</span>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-mih-amber">Zona Primaria Terrestre</span>
                                     <h3 class="text-white font-semibold text-base leading-snug">Los Andes (PTLA) & Fronteras</h3>
                                 </div>
                             </div>
 
                             <div class="col-span-1 relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-white/10 shadow-md group h-[192px]">
-                                <img 
-                                    src="/img/aerial.jpg" 
-                                    alt="Tramitación aduanera de carga aérea en Aeropuerto Internacional Arturo Merino Benítez SCL" 
-                                    class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
-                                    loading="lazy"
-                                    decoding="async"
-                                    width="600"
-                                    height="192"
-                                >
+                                <picture class="block h-full">
+                                    <source type="image/webp" srcset="/img/aerial.webp">
+                                    <img
+                                        src="/img/aerial.jpg"
+                                        alt="Tramitación aduanera de carga aérea en Aeropuerto Internacional Arturo Merino Benítez SCL"
+                                        class="w-full h-full object-cover opacity-90 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+                                        loading="lazy"
+                                        decoding="async"
+                                        width="600"
+                                        height="192"
+                                    >
+                                </picture>
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
                                 <div class="absolute bottom-4 left-5 right-5">
-                                    <span class="text-[10px] font-bold uppercase tracking-widest text-[#f59d02]">Zona Primaria Aérea</span>
+                                    <span class="text-[10px] font-bold uppercase tracking-widest text-mih-amber">Zona Primaria Aérea</span>
                                     <h3 class="text-white font-semibold text-base leading-snug">Aeropuerto SCL (Santiago)</h3>
                                 </div>
                             </div>
@@ -486,21 +534,21 @@ onUnmounted(() => {
                     </div>
 
                     <div class="space-y-6">
-                        <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Presencia en Terreno</span>
+                        <span class="text-xs font-bold uppercase tracking-widest text-mih-ink dark:text-mih-amber">Presencia en Terreno</span>
                         <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl leading-[1.1]">
                             Conexión integral.<br/>
-                            <span class="text-slate-400">Documento y recinto aduanero.</span>
+                            <span class="text-slate-500 dark:text-slate-400">Documento y recinto aduanero.</span>
                         </h2>
                         <p class="text-slate-600 dark:text-slate-300 font-medium text-sm sm:text-base leading-relaxed tracking-wide">
                             Acompañamos los despachos de importación y exportación directamente en las zonas primarias y recintos aduaneros autorizados de Chile. Nuestro personal asiste presencialmente los aforos dictaminados por el Servicio Nacional de Aduanas, coordinando inspecciones sanitarias y fitosanitarias con SAG, Sernapesca e ISP.
                         </p>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
-                            <div class="border-l-4 border-[#f59d02] pl-4">
+                            <div class="border-l-4 border-mih-amber pl-4">
                                 <h3 class="text-sm font-bold uppercase tracking-wider">Respaldo Digital Centralizado</h3>
                                 <p class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">Carpetas de despacho escaneadas y disponibles en línea en MIHSystem.</p>
                             </div>
-                            <div class="border-l-4 border-[#f59d02] pl-4">
+                            <div class="border-l-4 border-mih-amber pl-4">
                                 <h3 class="text-sm font-bold uppercase tracking-wider">Rigurosidad en Terreno</h3>
                                 <p class="text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">Supervisión física de sellos e inspecciones en zona primaria sin demoras.</p>
                             </div>
@@ -511,19 +559,13 @@ onUnmounted(() => {
         </section>
 
         <!-- Banner Tecnológico B2B (MIHSystem) -->
-        <section class="relative h-[50vh] bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url('/img/hero-bg.jpg');" aria-label="Plataforma Digital Corporativa MIHSystem">
-            <div class="absolute inset-0 bg-slate-100/40 dark:bg-slate-950/70"></div>
-            <div class="absolute inset-0 flex items-center justify-center text-center px-4">
-                <div class="relative overflow-hidden max-w-2xl border border-white/20 bg-white/60 dark:bg-black/40 backdrop-blur-3xl p-10 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-                <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #ffffff 1.5px; --tw-gradient-to: transparent 1.5px; background-size: 16px 16px;"></div>
-                <div class="relative z-10">
-                    <p class="text-xs font-bold uppercase tracking-widest text-[#f59d02] mb-2">Plataforma Corporativa MIHSystem</p>
-                    <h3 class="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900 dark:text-white mb-4">Trazabilidad y consulta de carpetas aduaneras 24/7.</h3>
-                    <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 font-medium leading-relaxed">
-                        Repositorio digital seguro para empresas y agencias de aduana aliadas. Acceso instantáneo al estatus documental bajo estricto cumplimiento de la Ley 21.719 de Protección de Datos Personales.
-                    </p>
-                </div>
-                </div>
+        <section class="relative bg-mih-amber py-20 lg:py-28" aria-label="Plataforma Digital Corporativa MIHSystem">
+            <div class="mx-auto max-w-2xl px-6 sm:px-8 text-center">
+                <p class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-2">Plataforma Corporativa MIHSystem</p>
+                <h3 class="text-2xl sm:text-3xl font-semibold tracking-tight text-balance text-slate-950 mb-4">Trazabilidad y consulta de carpetas aduaneras 24/7.</h3>
+                <p class="text-sm sm:text-base text-slate-800 font-medium leading-relaxed">
+                    Repositorio digital seguro para empresas y agencias de aduana aliadas. Acceso instantáneo al estatus documental bajo estricto cumplimiento de la Ley 21.719 de Protección de Datos Personales.
+                </p>
             </div>
         </section>
 
@@ -531,7 +573,7 @@ onUnmounted(() => {
         <section id="servicios" class="py-36 lg:py-48 transition-colors duration-500">
             <div class="mx-auto max-w-7xl px-6 sm:px-8">
                 <div class="text-center space-y-4 max-w-2xl mx-auto">
-                    <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Estructura de Servicios</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-mih-ink dark:text-mih-amber">Estructura de Servicios</span>
                     <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl">Nuestras líneas de acción documental.</h2>
                     <p class="text-sm font-medium text-slate-600 dark:text-slate-300">
                         Soluciones técnicas diseñadas con riguroso apego a la Ordenanza de Aduanas y la legislación de comercio exterior de Chile.
@@ -540,10 +582,14 @@ onUnmounted(() => {
 
                 <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
                     <!-- Exportación -->
-                    <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
+                    <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
-                        <div class="relative z-10">
-                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors">
+                        <picture class="block h-44 overflow-hidden" aria-hidden="true">
+                            <source type="image/webp" srcset="/img/operaciones.webp">
+                            <img src="/img/operaciones.jpg" alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" width="800" height="447">
+                        </picture>
+                        <div class="relative z-10 px-8 pb-8">
+                            <div class="-mt-6 h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 shadow-md ring-4 ring-white dark:ring-[#111111] transition-colors">
                                 <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
@@ -556,10 +602,14 @@ onUnmounted(() => {
                     </div>
 
                     <!-- Importación -->
-                    <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
+                    <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
-                        <div class="relative z-10">
-                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors">
+                        <picture class="block h-44 overflow-hidden" aria-hidden="true">
+                            <source type="image/webp" srcset="/img/terrestrial.webp">
+                            <img src="/img/terrestrial.jpg" alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" width="800" height="447">
+                        </picture>
+                        <div class="relative z-10 px-8 pb-8">
+                            <div class="-mt-6 h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 shadow-md ring-4 ring-white dark:ring-[#111111] transition-colors">
                                 <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                 </svg>
@@ -572,10 +622,14 @@ onUnmounted(() => {
                     </div>
 
                     <!-- Asistencia en Zona Primaria -->
-                    <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
+                    <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
-                        <div class="relative z-10">
-                            <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] shadow-sm border border-[#f59d02]/20 transition-colors">
+                        <picture class="block h-44 overflow-hidden" aria-hidden="true">
+                            <source type="image/webp" srcset="/img/aerial.webp">
+                            <img src="/img/aerial.jpg" alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" width="800" height="447">
+                        </picture>
+                        <div class="relative z-10 px-8 pb-8">
+                            <div class="-mt-6 h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 shadow-md ring-4 ring-white dark:ring-[#111111] transition-colors">
                                 <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>
@@ -594,7 +648,7 @@ onUnmounted(() => {
         <section id="faq" class="py-24 lg:py-32 transition-colors duration-500 relative border-t border-slate-200/60 dark:border-white/5">
             <div class="mx-auto max-w-5xl px-6 sm:px-8">
                 <div class="text-center space-y-4 max-w-2xl mx-auto mb-16">
-                    <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Resolución de Dudas B2B</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-mih-ink dark:text-mih-amber">Resolución de Dudas B2B</span>
                     <h2 class="text-3xl font-semibold tracking-tighter sm:text-4xl text-slate-900 dark:text-white">Preguntas Frecuentes sobre Gestión Aduanera</h2>
                     <p class="text-sm font-medium text-slate-600 dark:text-slate-300">
                         Información técnica sobre tramitación de carpetas, cobertura en zonas primarias y nuestra plataforma digital.
@@ -641,7 +695,7 @@ onUnmounted(() => {
             <div class="mx-auto max-w-7xl px-6 sm:px-8">
                 
                 <div class="max-w-3xl mb-16">
-                    <span class="text-xs font-bold uppercase tracking-widest text-[#f59d02]">Canales Oficiales</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-mih-ink dark:text-mih-amber">Canales Oficiales</span>
                     <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl text-slate-900 dark:text-white mt-1">Mesa de Operaciones Central.</h2>
                     <p class="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300 leading-relaxed mt-3">
                         Nuestras oficinas centrales están ubicadas en el centro histórico y aduanero de Valparaíso. De acuerdo con nuestra política de estricto resguardo documental y en cumplimiento de la Ley 21.719, las aperturas de carpetas y coordinaciones de despacho se gestionan exclusivamente mediante comunicación corporativa directa o credenciales en la plataforma MIHSystem.
@@ -656,7 +710,7 @@ onUnmounted(() => {
                         class="group rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 shadow-sm transition-all hover:scale-[1.02] hover:shadow-md"
                         aria-label="Llamar a Mesa Central de Operaciones al 032-3423242"
                     >
-                        <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] mb-6 group-hover:bg-[#f59d02] group-hover:text-slate-950 transition-colors">
+                        <div class="h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 mb-6 shadow-sm group-hover:bg-amber-300 transition-colors">
                             <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
@@ -674,7 +728,7 @@ onUnmounted(() => {
                         class="group rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 shadow-sm transition-all hover:scale-[1.02] hover:shadow-md"
                         aria-label="Enviar correo corporativo a contacto@mih.cl"
                     >
-                        <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] mb-6 group-hover:bg-[#f59d02] group-hover:text-slate-950 transition-colors">
+                        <div class="h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 mb-6 shadow-sm group-hover:bg-amber-300 transition-colors">
                             <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
@@ -688,7 +742,7 @@ onUnmounted(() => {
 
                     <!-- Tarjeta Sede Matriz -->
                     <div class="rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 shadow-sm">
-                        <div class="h-12 w-12 rounded-2xl bg-[#f59d02]/10 flex items-center justify-center text-[#f59d02] mb-6">
+                        <div class="h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 mb-6 shadow-sm">
                             <svg class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             </svg>
@@ -707,7 +761,7 @@ onUnmounted(() => {
                 <div class="rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 sm:p-10 shadow-sm">
                     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-200/60 dark:border-white/10">
                         <div>
-                            <span class="text-[11px] font-bold uppercase tracking-widest text-[#f59d02]">Red Operativa Nacional</span>
+                            <span class="text-[11px] font-bold uppercase tracking-widest text-mih-ink dark:text-mih-amber">Red Operativa Nacional</span>
                             <h3 class="text-xl font-semibold text-slate-900 dark:text-white mt-1">Presencia en Zonas Primarias (Marítimas, Terrestres y Aéreas)</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">
                                 Coordinación presencial de aforos, visaciones y tramitaciones en los principales recintos aduaneros de Chile.
@@ -717,27 +771,45 @@ onUnmounted(() => {
                             href="https://mihsystem.cl" 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#f59d02] px-6 py-3 text-xs font-bold text-slate-950 shadow-[0_4px_14px_rgba(245,157,2,0.3)] transition-all hover:scale-[1.02] hover:bg-[#e08f02] shrink-0"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-mih-amber px-6 py-3 text-xs font-bold text-slate-950 shadow-[0_4px_14px_rgba(251,191,36,0.35)] transition-all hover:scale-[1.02] hover:bg-amber-300 shrink-0"
                             aria-label="Acceder a la Plataforma de Clientes MIHSystem"
                         >
                             Acceso Clientes MIHSystem
                         </a>
                     </div>
 
-                    <div class="pt-6">
-                        <div class="flex flex-wrap gap-2">
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Arica (Chacalluta)</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-[#f59d02]/10 border border-[#f59d02]/30 text-[11px] font-semibold text-[#f59d02] uppercase tracking-wider">Valparaíso (Matriz & ZEAL)</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Coquimbo</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">San Antonio</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Los Andes (PTLA)</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Pino Hachado</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/30 text-[11px] font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider">Aeropuerto SCL (Santiago)</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Cardenal Samoré</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Talcahuano</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">San Vicente</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Lirquén</span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Coronel</span>
+                    <!-- Recorrido de norte a sur: una columna en móvil, columnas verticales en pantallas anchas -->
+                    <div class="pt-8">
+                        <ol class="grid grid-cols-1 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-6 lg:grid-cols-3 lg:grid-rows-4 sm:gap-x-10">
+                            <li
+                                v-for="zona in zonas"
+                                :key="zona.nombre"
+                                class="relative flex items-center gap-3 border-l-2 border-mih-amber/70 py-2.5 pl-6"
+                                :class="{ 'rounded-r-xl bg-mih-amber/15': zona.matriz }"
+                            >
+                                <span
+                                    class="absolute top-1/2 -translate-y-1/2 rounded-full bg-mih-amber ring-4 ring-white dark:ring-[#101010]"
+                                    :class="zona.matriz ? '-left-[9px] h-4 w-4' : '-left-[7px] h-3 w-3'"
+                                    aria-hidden="true"
+                                ></span>
+                                <component
+                                    :is="tiposZona[zona.tipo].icon"
+                                    class="h-4 w-4 shrink-0 text-slate-500 dark:text-slate-400"
+                                    role="img"
+                                    :aria-label="tiposZona[zona.tipo].label"
+                                />
+                                <span
+                                    class="text-[13px]"
+                                    :class="zona.matriz ? 'font-bold text-slate-950 dark:text-white' : 'font-semibold text-slate-700 dark:text-slate-200'"
+                                >{{ zona.nombre }}</span>
+                            </li>
+                        </ol>
+
+                        <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-slate-200/60 dark:border-white/10 pt-5 text-xs font-medium text-slate-600 dark:text-slate-300" aria-hidden="true">
+                            <span v-for="(tipo, clave) in tiposZona" :key="clave" class="inline-flex items-center gap-2">
+                                <component :is="tipo.icon" class="h-4 w-4 text-slate-500 dark:text-slate-400" />
+                                {{ tipo.label }}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -756,9 +828,9 @@ onUnmounted(() => {
                 <!-- Enlaces Legales (Ley 21.719) -->
                 <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
                     <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400 font-medium">
-                        <button type="button" @click="activeModal = 'terms'" aria-label="Abrir modal con Términos de Servicio" class="hover:text-[#f59d02] transition-colors cursor-pointer">Términos de Servicio</button>
+                        <button type="button" @click="activeModal = 'terms'" aria-label="Abrir modal con Términos de Servicio" class="hover:text-mih-ink dark:hover:text-mih-amber transition-colors cursor-pointer">Términos de Servicio</button>
                         <span aria-hidden="true">&bull;</span>
-                        <button type="button" @click="activeModal = 'privacy'" aria-label="Abrir modal con Política de Privacidad conforme a Ley 21.719" class="hover:text-[#f59d02] transition-colors cursor-pointer">Política de Privacidad (Ley 21.719)</button>
+                        <button type="button" @click="activeModal = 'privacy'" aria-label="Abrir modal con Política de Privacidad conforme a Ley 21.719" class="hover:text-mih-ink dark:hover:text-mih-amber transition-colors cursor-pointer">Política de Privacidad (Ley 21.719)</button>
                     </div>
                 </div>
             </div>
@@ -775,10 +847,10 @@ onUnmounted(() => {
             
             <aside v-if="showCookieBanner" aria-label="Consentimiento de cookies" class="fixed bottom-0 left-0 right-0 z-[90] p-4 sm:p-6 sm:bottom-4 sm:left-4 sm:right-auto sm:max-w-sm w-full">
                 <div class="bg-slate-900 dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 p-5 relative overflow-hidden">
-                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-[#f59d02]/10 rounded-full blur-2xl"></div>
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-mih-amber/10 rounded-full blur-2xl"></div>
                     
                     <div class="flex items-start gap-4">
-                        <div class="text-[#f59d02] shrink-0 mt-0.5">
+                        <div class="text-mih-amber shrink-0 mt-0.5">
                             <svg class="h-5 w-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
                             </svg>
@@ -794,7 +866,7 @@ onUnmounted(() => {
                         <button type="button" @click="showCookieBanner = false" aria-label="Aceptar solo cookies esenciales" class="text-[11px] font-bold text-slate-400 hover:text-white transition-colors px-2 py-2">
                             Solo Esenciales
                         </button>
-                        <button type="button" @click="acceptCookies" aria-label="Aceptar todas las cookies" class="rounded-lg bg-[#f59d02] px-4 py-2 text-[11px] font-bold text-slate-950 shadow-md transition-all hover:bg-[#d98502]">
+                        <button type="button" @click="acceptCookies" aria-label="Aceptar todas las cookies" class="rounded-lg bg-mih-amber px-4 py-2 text-[11px] font-bold text-slate-950 shadow-md transition-all hover:bg-amber-300">
                             Aceptar Cookies
                         </button>
                     </div>
@@ -814,10 +886,10 @@ onUnmounted(() => {
                 <!-- Cabecera -->
                 <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-6 py-4 bg-slate-50 dark:bg-slate-900/50">
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2" id="modal-title">
-                        <svg v-if="activeModal === 'privacy'" class="w-5 h-5 text-[#f59d02]" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <svg v-if="activeModal === 'privacy'" class="w-5 h-5 text-mih-ink dark:text-mih-amber" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
-                        <svg v-else class="w-5 h-5 text-[#f59d02]" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <svg v-else class="w-5 h-5 text-mih-ink dark:text-mih-amber" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                         {{ activeModal === 'privacy' ? 'Política de Privacidad' : 'Términos de Servicio' }}
@@ -835,7 +907,7 @@ onUnmounted(() => {
                         <p><strong>1. Responsable del Tratamiento:</strong> Agencia de Embarques MIH SpA, con domicilio en Almirante Señoret 70, Oficina 51, Valparaíso.</p>
                         <p><strong>2. Canales Directos y Sin Recolección Web:</strong> Este sitio web institucional no dispone de formularios de captura de datos ni almacena registros en bases de datos web. Las comunicaciones y requerimientos se canalizan de manera directa por correo electrónico, teléfono o mediante el acceso autenticado a la plataforma corporativa MIHSystem.</p>
                         <p><strong>3. Base Legal:</strong> El tratamiento de datos que se derive de relaciones comerciales u operativas se rige por la Ley N° 19.628 sobre Protección de la Vida Privada (actualizada por la Ley 21.719).</p>
-                        <p><strong>4. Derechos ARCO:</strong> Usted puede ejercer sus derechos de Acceso, Rectificación, Cancelación u Oposición enviando un correo a <a href="mailto:contacto@mih.cl" class="text-[#f59d02] font-semibold hover:underline" aria-label="Enviar correo para ejercicio de derechos ARCO">contacto@mih.cl</a>.</p>
+                        <p><strong>4. Derechos ARCO:</strong> Usted puede ejercer sus derechos de Acceso, Rectificación, Cancelación u Oposición enviando un correo a <a href="mailto:contacto@mih.cl" class="text-mih-ink dark:text-mih-amber font-semibold hover:underline" aria-label="Enviar correo para ejercicio de derechos ARCO">contacto@mih.cl</a>.</p>
                         <p><strong>5. Conservación:</strong> Los datos se almacenan en servidores seguros bajo altos estándares de la industria, durante el tiempo necesario para la prestación del servicio de gestión documental y operativo.</p>
                     </template>
                     <template v-else>
@@ -849,7 +921,7 @@ onUnmounted(() => {
 
                 <!-- Pie del modal -->
                 <div class="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 px-6 py-4 flex justify-end">
-                    <button type="button" @click="activeModal = 'none'" aria-label="Cerrar modal" class="rounded-lg bg-[#f59d02] px-6 py-2 text-sm font-bold text-slate-950 shadow-md transition-all hover:bg-[#d98502]">
+                    <button type="button" @click="activeModal = 'none'" aria-label="Cerrar modal" class="rounded-lg bg-mih-amber px-6 py-2 text-sm font-bold text-slate-950 shadow-md transition-all hover:bg-amber-300">
                         Entendido
                     </button>
                 </div>
