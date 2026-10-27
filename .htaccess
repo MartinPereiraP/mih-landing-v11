@@ -18,7 +18,8 @@
     RewriteCond %{REQUEST_URI} ^/favicon.svg
     RewriteRule ^(.*)$ public/$1 [L]
 
-    # 2. Bloquear acceso a carpetas internas de Laravel y dependencias en la raíz
+    # 2. Bloquear acceso a carpetas internas de Laravel y dependencias en la raíz (excepto assets públicos en resources/images/)
+    RewriteCond %{REQUEST_URI} !^/resources/images/
     RewriteRule ^(app|bootstrap|cache|config|database|node_modules|resources|routes|storage|tests|vendor)/(.*) - [F,L]
 
 

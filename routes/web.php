@@ -59,6 +59,34 @@ XML;
     ]);
 });
 
+// Exponer públicamente imágenes requeridas por firmas de correo (Outlook, webmail, etc.)
+Route::get('/resources/images/{filename}', function (string $filename) {
+    $filename = basename($filename);
+    $path = public_path('resources/images/'.$filename);
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+    $mimeType = match ($extension) {
+        'png' => 'image/png',
+        'jpg', 'jpeg' => 'image/jpeg',
+        'svg' => 'image/svg+xml',
+        'gif' => 'image/gif',
+        'webp' => 'image/webp',
+        'ico' => 'image/x-icon',
+        default => mime_content_type($path) ?: 'application/octet-stream',
+    };
+
+    return response()->file($path, [
+        'Content-Type' => $mimeType,
+        'Cache-Control' => 'public, max-age=2592000',
+        'Access-Control-Allow-Origin' => '*',
+        'Access-Control-Allow-Methods' => 'GET, OPTIONS',
+    ]);
+})->where('filename', '[a-zA-Z0-9_\-\.]+');
+
 // Redirigir cualquier ruta inexistente al home (/)
 Route::fallback(function () {
     return redirect('/');
