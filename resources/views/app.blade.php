@@ -169,10 +169,10 @@
                 },
                 {
                   "@type": "Question",
-                  "name": "¿MIH SpA actúa como Freight Forwarder o comercializa fletes internacionales?",
+                  "name": "¿MIH actúa como Freight Forwarder o comercializa fletes internacionales?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No. MIH SpA no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores."
+                    "text": "No. MIH no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores."
                   }
                 },
                 {
