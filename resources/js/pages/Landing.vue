@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
 import { ref, onMounted, onUnmounted } from 'vue';
-import { Anchor, Plane, Truck } from '@lucide/vue';
+import { Anchor, ArrowUp, Plane, Truck } from '@lucide/vue';
 
 const isDark = ref(false);
 const activeModal = ref<'none' | 'privacy' | 'terms'>('none');
@@ -18,8 +18,8 @@ const faqs = [
         a: 'Agencia de Embarques MIH SpA está especializada en la tramitación documental aduanera para operaciones de comercio exterior (confección y tramitación de DUS para exportación y DIN para importación), visaciones, conformación de sets documentales de embarque, asistencia presencial en aforos aduaneros en zonas primarias y digitalización de carpetas de despacho a través de la plataforma MIHSystem.'
     },
     {
-        q: '¿MIH SpA actúa como Freight Forwarder o comercializa fletes internacionales?',
-        a: 'No. MIH SpA no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores.'
+        q: '¿MIH actúa como Freight Forwarder o comercializa fletes internacionales?',
+        a: 'No. MIH no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores.'
     },
     {
         q: '¿En qué zonas primarias (marítimas, terrestres y aéreas) opera MIH a nivel nacional?',
@@ -75,7 +75,9 @@ const handleScroll = () => {
 };
 
 const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Respeta la preferencia de movimiento reducido del sistema
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
 };
 
 onMounted(() => {
@@ -90,7 +92,7 @@ onMounted(() => {
     } else {
         isDark.value = document.documentElement.classList.contains('dark');
     }
-    
+
     if (!localStorage.getItem('cookies_accepted')) {
         setTimeout(() => { showCookieBanner.value = true; }, 1500);
     }
@@ -113,7 +115,7 @@ onUnmounted(() => {
         <meta name="geo.placename" content="Valparaíso, Chile" />
         <meta name="geo.position" content="-33.0458;-71.6238" />
         <meta name="ICBM" content="-33.0458, -71.6238" />
-        
+
         <!-- Open Graph / Redes Sociales -->
         <meta property="og:locale" content="es_CL" />
         <meta property="og:type" content="website" />
@@ -248,10 +250,10 @@ onUnmounted(() => {
                 },
                 {
                   "@type": "Question",
-                  "name": "¿MIH SpA actúa como Freight Forwarder o comercializa fletes internacionales?",
+                  "name": "¿MIH actúa como Freight Forwarder o comercializa fletes internacionales?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No. MIH SpA no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores."
+                    "text": "No. MIH no es un freight forwarder ni comercializa fletes de barcos o aviones. Nos concentramos rigurosamente en la gestión documental aduanera y en la asistencia operativa en recintos aduaneros y zonas primarias, colaborando directamente con Agencias de Aduana, importadores y exportadores."
                   }
                 },
                 {
@@ -286,7 +288,7 @@ onUnmounted(() => {
     </Head>
 
     <div class="min-h-screen bg-[#fafafa] text-slate-900 dark:bg-[#050505] dark:text-slate-100 font-sans antialiased selection:bg-mih-amber selection:text-slate-950 transition-colors duration-500 relative overflow-hidden">
-        
+
         <!-- Apple-style Ambient Glow -->
         <div class="pointer-events-none absolute inset-0 overflow-hidden flex justify-center z-0">
             <div class="w-[800px] h-[400px] bg-white dark:bg-mih-amber opacity-100 dark:opacity-[0.03] blur-[100px] rounded-full absolute -top-32 transition-all duration-700"></div>
@@ -296,18 +298,18 @@ onUnmounted(() => {
         <header class="sticky top-0 z-50 border-b border-slate-200/60 dark:border-white/[0.04] bg-white/60 dark:bg-[#0a0a0a]/60 backdrop-blur-2xl transition-all duration-500">
             <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8">
                 <a href="/" class="flex items-center gap-3" aria-label="Inicio - Agencia de Embarques MIH">
-                    <img 
-                        src="/img/logo-black.svg" 
-                        alt="Agencia de Embarques MIH - Tramitación Documental Aduanera en Chile" 
+                    <img
+                        src="/img/logo-black.svg"
+                        alt="Agencia de Embarques MIH - Tramitación Documental Aduanera en Chile"
                         class="h-11 w-auto object-contain block dark:hidden"
                         fetchpriority="high"
                         loading="eager"
                         width="160"
                         height="44"
                     >
-                    <img 
-                        src="/img/logo-white.svg" 
-                        alt="Agencia de Embarques MIH - Tramitación Documental Aduanera en Chile" 
+                    <img
+                        src="/img/logo-white.svg"
+                        alt="Agencia de Embarques MIH - Tramitación Documental Aduanera en Chile"
                         class="h-11 w-auto object-contain hidden dark:block"
                         fetchpriority="high"
                         loading="eager"
@@ -322,10 +324,10 @@ onUnmounted(() => {
                     <a href="#faq" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a Preguntas Frecuentes">Preguntas Frecuentes</a>
                     <a href="#contacto" class="text-[13px] tracking-wide font-medium text-slate-500 dark:text-slate-400 transition-colors hover:text-slate-900 dark:hover:text-white" aria-label="Ir a sección de Contacto Operativo">Contacto</a>
 
-                    <button 
-                        @click="toggleDark" 
-                        class="rounded-full p-2 border border-slate-200 dark:border-white/10 text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all cursor-pointer flex items-center justify-center" 
-                        title="Cambiar modo visual" 
+                    <button
+                        @click="toggleDark"
+                        class="rounded-full p-2 border border-slate-200 dark:border-white/10 text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-all cursor-pointer flex items-center justify-center"
+                        title="Cambiar modo visual"
                         type="button"
                         aria-label="Cambiar tema visual claro u oscuro"
                     >
@@ -337,9 +339,9 @@ onUnmounted(() => {
                         </svg>
                     </button>
 
-                    <a 
-                        href="https://mihsystem.cl" 
-                        target="_blank" 
+                    <a
+                        href="https://mihsystem.cl"
+                        target="_blank"
                         rel="noopener noreferrer"
                         class="inline-flex items-center justify-center rounded-full bg-slate-900 dark:bg-white px-5 py-2 text-[13px] font-semibold text-white dark:text-slate-900 shadow-[0_4px_14px_0_rgba(0,0,0,0.1)] dark:shadow-[0_4px_14px_0_rgba(255,255,255,0.05)] transition-all hover:scale-[1.02] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_6px_20px_rgba(255,255,255,0.1)]"
                         aria-label="Acceder a la Plataforma de Clientes MIHSystem (se abre en nueva pestaña)"
@@ -386,24 +388,24 @@ onUnmounted(() => {
                     <p class="text-lg sm:text-xl text-slate-200 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed tracking-tight">
                         Confeccionamos, visamos y tramitamos carpetas aduaneras de exportación (DUS) e importación (DIN), brindando asistencia presencial en aforos en zonas primarias y respaldo digital 24/7 en MIHSystem.
                     </p>
-                    
+
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
-                        <a 
-                            href="#contacto" 
+                        <a
+                            href="#contacto"
                             class="rounded-full bg-mih-amber px-8 py-3.5 text-center text-[15px] font-semibold text-slate-950 shadow-[0_8px_20px_rgba(251,191,36,0.3)] transition-all hover:scale-[1.02] hover:bg-amber-300"
                             aria-label="Contactar a la mesa de operaciones de MIH"
                         >
                             Contactar Operaciones
                         </a>
-                        <a 
-                            href="#servicios" 
+                        <a
+                            href="#servicios"
                             class="rounded-full bg-white/10 border border-white/25 backdrop-blur-md px-8 py-3.5 text-center text-[15px] font-medium text-white shadow-sm transition-all hover:scale-[1.02] hover:bg-white/20"
                             aria-label="Descubrir los servicios documentales aduaneros de MIH"
                         >
                             Servicios Documentales
                         </a>
                     </div>
-                    
+
                     <div class="flex items-center gap-2 mt-6 justify-center lg:justify-start">
                         <svg class="h-4 w-4 text-emerald-400 shrink-0" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -443,9 +445,9 @@ onUnmounted(() => {
                             </div>
 
                             <div class="pt-2">
-                                <a 
-                                    href="https://mihsystem.cl" 
-                                    target="_blank" 
+                                <a
+                                    href="https://mihsystem.cl"
+                                    target="_blank"
                                     rel="noopener noreferrer"
                                     class="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-mih-amber/60 dark:border-mih-amber/40 bg-mih-amber/10 py-3.5 text-[12px] font-mono font-bold text-mih-ink dark:text-mih-amber hover:bg-mih-amber/25 hover:border-mih-amber transition-all shadow-sm"
                                     aria-label="Ingresar al sistema corporativo MIHSystem (se abre en nueva pestaña)"
@@ -469,7 +471,7 @@ onUnmounted(() => {
                     <div class="relative">
                         <div class="absolute -inset-2 rounded-xl bg-gradient-to-r from-mih-amber to-amber-600 opacity-10 blur-xl"></div>
                         <div class="relative grid grid-cols-2 gap-4 h-full">
-                            
+
                             <div class="col-span-1 row-span-2 relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-white/10 shadow-md group h-[400px]">
                                 <picture class="block h-full">
                                     <source type="image/webp" srcset="/img/operaciones-1376.webp">
@@ -529,7 +531,7 @@ onUnmounted(() => {
                                     <h3 class="text-white font-semibold text-base leading-snug">Aeropuerto SCL (Santiago)</h3>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
 
@@ -585,8 +587,8 @@ onUnmounted(() => {
                     <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
                         <picture class="block h-44 overflow-hidden" aria-hidden="true">
-                            <source type="image/webp" srcset="/img/operaciones.webp">
-                            <img src="/img/operaciones.jpg" alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" width="800" height="447">
+                            <source type="image/webp" srcset="/img/servicio-exportacion.webp">
+                            <img src="/img/servicio-exportacion.jpg" alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" width="800" height="599">
                         </picture>
                         <div class="relative z-10 px-8 pb-8">
                             <div class="-mt-6 h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 shadow-md ring-4 ring-white dark:ring-[#111111] transition-colors">
@@ -605,8 +607,8 @@ onUnmounted(() => {
                     <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
                         <picture class="block h-44 overflow-hidden" aria-hidden="true">
-                            <source type="image/webp" srcset="/img/terrestrial.webp">
-                            <img src="/img/terrestrial.jpg" alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" width="800" height="447">
+                            <source type="image/webp" srcset="/img/servicio-importacion.webp">
+                            <img src="/img/servicio-importacion.jpg" alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" width="800" height="533">
                         </picture>
                         <div class="relative z-10 px-8 pb-8">
                             <div class="-mt-6 h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 shadow-md ring-4 ring-white dark:ring-[#111111] transition-colors">
@@ -625,8 +627,8 @@ onUnmounted(() => {
                     <div class="relative overflow-hidden bg-white/60 dark:bg-white/5 backdrop-blur-2xl border border-slate-200/50 dark:border-white/10 rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_20px_40px_rgb(0,0,0,0.2)]">
                         <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" style="background-image: radial-gradient(var(--tw-gradient-stops)); --tw-gradient-from: #64748b 1px; --tw-gradient-to: transparent 1px; background-size: 24px 24px;"></div>
                         <picture class="block h-44 overflow-hidden" aria-hidden="true">
-                            <source type="image/webp" srcset="/img/aerial.webp">
-                            <img src="/img/aerial.jpg" alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" width="800" height="447">
+                            <source type="image/webp" srcset="/img/servicio-zona-primaria.webp">
+                            <img src="/img/servicio-zona-primaria.jpg" alt="" class="h-full w-full object-cover object-[center_15%]" loading="lazy" decoding="async" width="800" height="533">
                         </picture>
                         <div class="relative z-10 px-8 pb-8">
                             <div class="-mt-6 h-12 w-12 rounded-2xl bg-mih-amber flex items-center justify-center text-slate-950 shadow-md ring-4 ring-white dark:ring-[#111111] transition-colors">
@@ -656,8 +658,8 @@ onUnmounted(() => {
                 </div>
 
                 <div class="space-y-4">
-                    <div 
-                        v-for="(faq, index) in faqs" 
+                    <div
+                        v-for="(faq, index) in faqs"
                         :key="index"
                         class="rounded-2xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-xl overflow-hidden transition-all duration-300"
                     >
@@ -677,8 +679,8 @@ onUnmounted(() => {
                                 </svg>
                             </div>
                         </button>
-                        <div 
-                            v-show="openFaq === index" 
+                        <div
+                            v-show="openFaq === index"
                             :id="`faq-answer-${index}`"
                             class="px-6 pb-6 text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-white/5 pt-4"
                         >
@@ -693,7 +695,7 @@ onUnmounted(() => {
         <section id="contacto" class="py-36 lg:py-48 transition-colors duration-500 relative">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-100/50 dark:to-white/[0.02] pointer-events-none"></div>
             <div class="mx-auto max-w-7xl px-6 sm:px-8">
-                
+
                 <div class="max-w-3xl mb-16">
                     <span class="text-xs font-bold uppercase tracking-widest text-mih-ink dark:text-mih-amber">Canales Oficiales</span>
                     <h2 class="text-4xl font-semibold tracking-tighter sm:text-5xl text-slate-900 dark:text-white mt-1">Mesa de Operaciones Central.</h2>
@@ -703,9 +705,9 @@ onUnmounted(() => {
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                    
+
                     <!-- Tarjeta Teléfono -->
-                    <a 
+                    <a
                         href="tel:+56323423242"
                         class="group rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 shadow-sm transition-all hover:scale-[1.02] hover:shadow-md"
                         aria-label="Llamar a Mesa Central de Operaciones al 032-3423242"
@@ -723,7 +725,7 @@ onUnmounted(() => {
                     </a>
 
                     <!-- Tarjeta Correo -->
-                    <a 
+                    <a
                         href="mailto:contacto@mih.cl"
                         class="group rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl p-8 shadow-sm transition-all hover:scale-[1.02] hover:shadow-md"
                         aria-label="Enviar correo corporativo a contacto@mih.cl"
@@ -767,9 +769,9 @@ onUnmounted(() => {
                                 Coordinación presencial de aforos, visaciones y tramitaciones en los principales recintos aduaneros de Chile.
                             </p>
                         </div>
-                        <a 
-                            href="https://mihsystem.cl" 
-                            target="_blank" 
+                        <a
+                            href="https://mihsystem.cl"
+                            target="_blank"
                             rel="noopener noreferrer"
                             class="inline-flex items-center justify-center gap-2 rounded-xl bg-mih-amber px-6 py-3 text-xs font-bold text-slate-950 shadow-[0_4px_14px_rgba(251,191,36,0.35)] transition-all hover:scale-[1.02] hover:bg-amber-300 shrink-0"
                             aria-label="Acceder a la Plataforma de Clientes MIHSystem"
@@ -824,7 +826,7 @@ onUnmounted(() => {
                     <span class="font-bold tracking-tight">MIH</span>
                     <span class="text-slate-600 dark:text-slate-300 font-medium">| &copy; 2016 - {{ new Date().getFullYear() }} Agencia de Embarques MIH SpA. Todos los derechos reservados.</span>
                 </div>
-                
+
                 <!-- Enlaces Legales (Ley 21.719) -->
                 <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
                     <div class="flex items-center gap-4 text-slate-500 dark:text-slate-400 font-medium">
@@ -836,19 +838,33 @@ onUnmounted(() => {
             </div>
         </footer>
 
+        <!-- Botón volver arriba: aparece tras 300 px de scroll -->
+        <transition name="fade">
+            <button
+                v-if="showScrollTop"
+                type="button"
+                @click="scrollToTop"
+                class="fixed bottom-6 right-6 z-[80] flex h-12 w-12 items-center justify-center rounded-full bg-mih-night text-mih-amber shadow-[0_8px_24px_rgba(0,0,0,0.25)] ring-1 ring-white/15 transition-all hover:scale-105 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-mih-amber/70 cursor-pointer"
+                title="Volver arriba"
+                aria-label="Volver al inicio de la página"
+            >
+                <ArrowUp class="h-5 w-5" stroke-width="2.5" aria-hidden="true" />
+            </button>
+        </transition>
+
         <!-- Cookie Banner (Ley 21.719 / RGPD) -->
-        <transition 
+        <transition
             enter-active-class="transition duration-500 ease-out transform"
             enter-from-class="translate-y-full opacity-0"
             enter-to-class="translate-y-0 opacity-100"
             leave-active-class="transition duration-300 ease-in transform"
             leave-from-class="translate-y-0 opacity-100"
             leave-to-class="translate-y-full opacity-0">
-            
+
             <aside v-if="showCookieBanner" aria-label="Consentimiento de cookies" class="fixed bottom-0 left-0 right-0 z-[90] p-4 sm:p-6 sm:bottom-4 sm:left-4 sm:right-auto sm:max-w-sm w-full">
                 <div class="bg-slate-900 dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 p-5 relative overflow-hidden">
                     <div class="absolute -top-10 -right-10 w-24 h-24 bg-mih-amber/10 rounded-full blur-2xl"></div>
-                    
+
                     <div class="flex items-start gap-4">
                         <div class="text-mih-amber shrink-0 mt-0.5">
                             <svg class="h-5 w-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -882,7 +898,7 @@ onUnmounted(() => {
 
             <!-- Contenedor del Modal -->
             <div class="modal-content relative w-full max-w-2xl overflow-hidden rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col max-h-[85vh]">
-                
+
                 <!-- Cabecera -->
                 <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 px-6 py-4 bg-slate-50 dark:bg-slate-900/50">
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2" id="modal-title">
@@ -912,7 +928,7 @@ onUnmounted(() => {
                     </template>
                     <template v-else>
                         <p><strong>1. Alcance de los Servicios:</strong> Agencia de Embarques MIH SpA se especializa en la gestión documental y asistencia operativa en zona primaria para la tramitación de despachos de exportación (DUS) e importación (DIN) ante el Servicio Nacional de Aduanas.</p>
-                        <p><strong>2. Responsabilidad Operativa:</strong> MIH SpA asume la gestión diligente de las carpetas aduaneras y el acompañamiento en aforos, pero no se responsabiliza por retrasos, aforos extraordinarios o resoluciones dictaminadas de forma unilateral y privativa por Aduana, SAG, Sernapesca u otras autoridades competentes.</p>
+                        <p><strong>2. Responsabilidad Operativa:</strong> MIH asume la gestión diligente de las carpetas aduaneras y el acompañamiento en aforos, pero no se responsabiliza por retrasos, aforos extraordinarios o resoluciones dictaminadas de forma unilateral y privativa por Aduana, SAG, Sernapesca u otras autoridades competentes.</p>
                         <p><strong>3. Confidencialidad Corporativa:</strong> Toda información comercial y documental relativa a sus despachos será tratada con estricta reserva y confidencialidad.</p>
                         <p><strong>4. Ajustes Tarifarios:</strong> Cualquier cotización u honorario por servicios documentales está sujeto a las condiciones declaradas en los instructivos y sets documentales proporcionados.</p>
                         <p><strong>5. Jurisdicción:</strong> Cualquier controversia derivada de la prestación de los servicios será sometida a la jurisdicción de los Tribunales Ordinarios de Valparaíso, Chile.</p>
