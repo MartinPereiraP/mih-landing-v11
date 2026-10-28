@@ -27,6 +27,8 @@
 - Paleta corporativa `mih` (`amber` #fbbf24, `ink` #92400e, `night` #0b1a2e) en `tailwind.config.js`.
 - Versiones WebP optimizadas de las fotografías en `public/img/` (`hero-bg`, `operaciones`, `operaciones-1376`, `terrestrial`, `aerial`), servidas con `<picture>` y respaldo JPG.
 - Recorrido de la Red Operativa Nacional de norte a sur en `Landing.vue`, con ícono por tipo de zona primaria (marítima, terrestre y aérea) y la matriz de Valparaíso destacada.
+- Botón flotante para volver al inicio en `Landing.vue`, visible tras 300 px de scroll y respetuoso de la preferencia de movimiento reducido.
+- Fotografías libres (Licencia Unsplash) para las tarjetas de servicios en `public/img/servicio-*.webp` con respaldo JPG: terminal del puerto de Valparaíso (David Vives), timbre documental (Markus Spiske) e inspección en zona primaria (Haris Illahi).
 
 ### Modificado
 - Activación pública de la Landing Page oficial en la ruta raíz (`/`), retirando la pantalla de mantenimiento para visualización directa en producción.
@@ -36,6 +38,7 @@
 - Compilación de assets para producción con Vite (`public/build/`).
 - Rediseño visual de `Landing.vue` sin cambios de contenido: hero con fotografía portuaria y velo corporativo, fotografías en las tarjetas de servicios, franja MIHSystem en ámbar corporativo y acentos unificados en la paleta `mih`.
 - Precarga de la imagen principal en `resources/views/app.blade.php` apuntando a `hero-bg.webp` (989 KB → 138 KB).
+- Abreviatura corporativa unificada como "MIH" (razón social completa: Agencia de Embarques MIH SpA) en la pregunta frecuente, su JSON-LD (`Landing.vue` y `app.blade.php`) y los Términos de Servicio.
 
 ### Eliminado
 - Supresión total del formulario web de contacto en `Landing.vue` para cumplimiento riguroso de la Ley 21.719 (sin captura ni almacenamiento de datos web), canalizando los requerimientos exclusivamente por medios directos (teléfono, email corporativo y plataforma MIHSystem).
@@ -43,6 +46,7 @@
 - Archivo muerto `resources/views/welcome.blade.php` (remanente tradicional de Laravel no utilizado en la arquitectura Inertia.js).
 - Componentes redundantes `Welcome.vue` y `Welcome.original.vue` en favor de la nomenclatura explícita (`Maintenance.vue` y `Landing.vue`).
 - Desindexación de la carpeta de IA `.agents/` del seguimiento de Git e inclusión en `.gitignore` para mantener el repositorio limpio y neutral.
+- `public/img/operaciones.webp` (800 px), sin uso tras el reemplazo de las fotografías de servicios.
 
 ### Arreglado
 - Configuración de `index.php` en la raíz y reglas estrictas de `.htaccess` para prevenir redirecciones 301 invasivas de Apache (Hostinger) hacia `/public/`.
