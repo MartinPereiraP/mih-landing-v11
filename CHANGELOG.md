@@ -39,6 +39,7 @@
 - Rediseño visual de `Landing.vue` sin cambios de contenido: hero con fotografía portuaria y velo corporativo, fotografías en las tarjetas de servicios, franja MIHSystem en ámbar corporativo y acentos unificados en la paleta `mih`.
 - Precarga de la imagen principal en `resources/views/app.blade.php` apuntando a `hero-bg.webp` (989 KB → 138 KB).
 - Abreviatura corporativa unificada como "MIH" (razón social completa: Agencia de Embarques MIH SpA) en la pregunta frecuente, su JSON-LD (`Landing.vue` y `app.blade.php`) y los Términos de Servicio.
+- Restablecimiento temporal de la pantalla de mantenimiento (`Maintenance.vue`) en la ruta raíz (`/`) y actualización de comentarios descriptivos en `routes/web.php`, manteniendo la Landing Page oficial accesible en `/preview`.
 
 ### Eliminado
 - Supresión total del formulario web de contacto en `Landing.vue` para cumplimiento riguroso de la Ley 21.719 (sin captura ni almacenamiento de datos web), canalizando los requerimientos exclusivamente por medios directos (teléfono, email corporativo y plataforma MIHSystem).

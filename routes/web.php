@@ -3,15 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Modo Mantenimiento (comentado para fácil reactivación si se requiere):
-// Route::get('/', function () {
-//     return Inertia::render('Maintenance');
-// });
-
-// Ruta pública principal: Landing Page oficial
+// Ruta pública principal: Modo Mantenimiento activo
 Route::get('/', function () {
-    return Inertia::render('Landing');
+    return Inertia::render('Maintenance');
 });
+
+// Landing Page oficial (comentada temporalmente en raíz; disponible en /preview):
+// Route::get('/', function () {
+//     return Inertia::render('Landing');
+// });
 
 // Ruta preview mantenida para acceso directo y retrocompatibilidad
 Route::get('/preview', function () {
@@ -62,7 +62,7 @@ XML;
 // Exponer públicamente imágenes requeridas por firmas de correo (Outlook, webmail, etc.)
 Route::get('/resources/images/{filename}', function (string $filename) {
     $filename = basename($filename);
-    $path = public_path('resources/images/'.$filename);
+    $path = public_path('resources/images/' . $filename);
 
     if (!file_exists($path)) {
         abort(404);

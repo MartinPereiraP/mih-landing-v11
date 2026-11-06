@@ -23,4 +23,6 @@ yarn-error.log
 /.zed
 .DS_Store
 /.agents/
+/.serena/
+/templates/
 
